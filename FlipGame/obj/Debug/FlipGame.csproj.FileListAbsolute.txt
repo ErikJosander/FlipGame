@@ -1,0 +1,6 @@
+C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\bin\Debug\FlipGame.exe.config
+C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\bin\Debug\FlipGame.exe
+C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\bin\Debug\FlipGame.pdb
+C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\obj\Debug\FlipGame.csprojAssemblyReference.cache
+C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\obj\Debug\FlipGame.exe
+C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\obj\Debug\FlipGame.pdb
