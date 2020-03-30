@@ -12,12 +12,13 @@ namespace FlipGame
         public List<int> usedNumbers = new List<int>();
         public List<int> numbersToChooseFrom = new List<int>();
         public Random rnd = new Random();
-        public int wherePointerIs;
-        public bool oneNumberChoosen = false;       
+        public int wherePointerIs = 5;
+        public bool oneNumberChoosen = false;
         public int firstChoice = 0;
         public int firstRoll;
         public int secondRoll;
         public int totalRoll = 0;
+        public bool endThisTurn = false;
         public Board()
         {
             for (int i = 1; i <= 9; i++)
@@ -25,61 +26,33 @@ namespace FlipGame
                 boardNumbers.Add(i);
             }
         }
-        public void ShowBoard(int wherePointerIs)
-        {          
-            CalculateOptions();
-            for (int i = 1; i <= 9; i++)
-            {
-                if (boardNumbers.Contains(i) && i != wherePointerIs)
-                {
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write(i);
-                    Console.Write(" ");
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-                if (usedNumbers.Contains(i) && i != wherePointerIs)
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkGray;
-                    Console.Write(i);
-                    Console.Write(" ");
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-                if (numbersToChooseFrom.Contains(i) && i != wherePointerIs)
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write(i);
-                    Console.Write(" ");
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-                if (i == wherePointerIs)
-                {
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.Write(i);
-                    Console.Write(" ");
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-            }
-        }
         public void PointerAction(string input)
         {
             switch (input)
             {
                 case ("a"):
-                    if(wherePointerIs > 1)
+                    if (wherePointerIs > 1)
                     {
                         wherePointerIs -= 1;
-                    }                   
+                    }
                     break;
                 case ("d"):
-                    if(wherePointerIs < 9)
+                    if (wherePointerIs < 9)
                     {
                         wherePointerIs += 1;
-                    }                  
+                    }
                     break;
                 case ("o"):
                     if (numbersToChooseFrom.Contains(wherePointerIs))
-                    {
+                    {                       
+                        firstChoice = wherePointerIs;
                         AddNumberToUsedNunber(wherePointerIs);
+                        oneNumberChoosen = true;
+                        CalculateOptions();
+                        if(numbersToChooseFrom.Count() == 0)
+                        {
+                            endThisTurn = true;
+                        }
                     }
                     break;
             }
@@ -131,6 +104,19 @@ namespace FlipGame
             firstRoll = rnd.Next(1, 7);
             secondRoll = rnd.Next(1, 7);
             totalRoll = (firstRoll + secondRoll);
+        }
+        public void SetUpNewTurn()
+        {
+            
+        }
+        public void CalculateValue(Player player)
+        {
+            int sum = 0;
+            foreach(var numbers in boardNumbers)
+            {
+                sum += numbers;
+            }
+            player.Score += sum;
         }
     }
 }
