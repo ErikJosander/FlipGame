@@ -40,7 +40,6 @@ namespace FlipGame
         }
         public static void ShowBoard()
         {
-
             bool showBoardRunning = true;
             while (showBoardRunning)
             {

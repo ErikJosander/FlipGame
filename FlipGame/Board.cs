@@ -13,10 +13,11 @@ namespace FlipGame
         public List<int> numbersToChooseFrom = new List<int>();
         public Random rnd = new Random();
         public int wherePointerIs;
-        public bool oneNumberChoosen = false;
-        public int totalRoll = 0;
+        public bool oneNumberChoosen = false;       
         public int firstChoice = 0;
-
+        public int firstRoll;
+        public int secondRoll;
+        public int totalRoll = 0;
         public Board()
         {
             for (int i = 1; i <= 9; i++)
@@ -25,7 +26,7 @@ namespace FlipGame
             }
         }
         public void ShowBoard(int wherePointerIs)
-        {
+        {          
             CalculateOptions();
             for (int i = 1; i <= 9; i++)
             {
@@ -127,9 +128,9 @@ namespace FlipGame
         }
         public void RollDices()
         {
-            var firstRoll = rnd.Next(1, 7);
-            var seconfRoll = rnd.Next(1, 7);
-            totalRoll = firstRoll + seconfRoll;
+            firstRoll = rnd.Next(1, 7);
+            secondRoll = rnd.Next(1, 7);
+            totalRoll = (firstRoll + secondRoll);
         }
     }
 }
