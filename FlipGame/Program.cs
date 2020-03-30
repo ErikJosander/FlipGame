@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace FlipGame
 {
@@ -16,7 +14,6 @@ namespace FlipGame
         {
             while (pointerRunning)
             {
-
                 Console.Clear();
                 ShowBoard(player);
 
@@ -136,11 +133,7 @@ namespace FlipGame
             Player erik = new Player() { Name = "erik", Score = 0 };
             StartGame(erik);
             Console.ReadLine();
-        }
-        public static void AddToFinal(Player player)
-        {
-
-        }
+        }     
     }
 }
 
