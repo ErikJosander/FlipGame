@@ -4,3 +4,11 @@ C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\bin\Debug\FlipGame.p
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\obj\Debug\FlipGame.csprojAssemblyReference.cache
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\obj\Debug\FlipGame.exe
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\obj\Debug\FlipGame.pdb
+C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\bin\Debug\EntityFramework.dll
+C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\bin\Debug\EntityFramework.xml
+C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\obj\Debug\FlipGame.csproj.CopyComplete
+C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\bin\Debug\FlipGameDataBase.dll
+C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\bin\Debug\FlipGameDataBase.pdb
+C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\bin\Debug\FlipGameDataBase.dll.config

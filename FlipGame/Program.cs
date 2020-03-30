@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using FlipGameDataBase.Data;
+using System.Data.Entity;
 
 
 namespace FlipGame
@@ -118,30 +120,10 @@ namespace FlipGame
             firstTurn = true;
         }
         static void Main(string[] args)
-        {       
-            int input = ReadIntInput(2);
-            switch (input)
-            {
-                case 1:
-                    CreatePlayer();
-                    break;
-                case 2:
-                    CreateGame();
-                    break;              
-                default:
-                    break;
-            }
-
-            Console.ReadLine();
-        }
-        public static void CreatePlayer()
-        {           
-            var nameOfPLayer = ReadInput("Enter Name of player: ");
-
-        }
-        public static void CreateGame()
         {
 
+            Repository.SeedDatabase();
+            Console.ReadLine();
         }
         public static int ReadIntInput(int range)
         {

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace FlipGameDataBase.Models
 {
-    class Score
+    public class Score
     {
+        public int Id { get; set; }
+        public DateTime PlayedOn { get; set; }
+      
     }
 }
