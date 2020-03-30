@@ -10,12 +10,16 @@ namespace FlipGame
     {
         public static Board board = new Board();
         public static bool pointerRunning = true;
+        public static bool playerTurnEnded = false;
+        public static bool firstTurn = true;
         public static void MovePointer(Player player)
-        {      
+        {
             while (pointerRunning)
-            {                
+            {
+
                 Console.Clear();
-                ShowBoard();
+                ShowBoard(player);
+
                 bool insideRunning = true;
                 char x = 'a';
                 while (insideRunning)
@@ -37,21 +41,19 @@ namespace FlipGame
                     // Press Action Button
                     case ('o'):
                         board.PointerAction("o");
+                        firstTurn = false;
+
+                        if (board.endThisTurn == true)
+                        {
+                            pointerRunning = false;
+                        }
                         break;
-                }
-                if (board.endThisTurn == true)
-                {
-                    pointerRunning = false;
-                }
-                if (board.firstChoice == 0 && board.numbersToChooseFrom.Count() == 0)
-                {
-                    board.CalculateValue(player);
                 }
             }
         }
-        public static void ShowBoard()
+        public static void ShowBoard(Player player)
         {
-            Console.WriteLine($"You rolled {board.firstRoll} and {board.secondRoll}");
+            Console.WriteLine($"{player.Name} rolled {board.firstRoll} and {board.secondRoll}");
             for (int i = 1; i <= 9; i++)
             {
                 if (board.boardNumbers.Contains(i) && i != board.wherePointerIs && !board.numbersToChooseFrom.Contains(i))
@@ -86,31 +88,58 @@ namespace FlipGame
         }
         public static void StartGame(Player player)
         {
-            
+            board = new Board();
+            bool running = true;
+            while (running)
+            {
+                ResetAfterThrow();
+                Console.Clear();
+                Console.WriteLine("Press enter to roll dices");
+                Console.ReadLine();
+                board.RollDices();
+                board.CalculateOptions();
+                if (board.numbersToChooseFrom.Count() == 0 && firstTurn == true)
+                {
+                    playerTurnEnded = true;
+                    pointerRunning = false;
+                    Console.Clear();
+                    ShowBoard(player);
+                    board.CalculateValue(player);
+                    Console.WriteLine();
+                    Console.WriteLine($"{player.Name} scored: {player.Score}");
+                    Console.ReadLine();
+                    running = false;
+                }
+                MovePointer(player);
+            }
         }
         public static void ResetAfterThrow()
         {
             pointerRunning = true;
             board.endThisTurn = false;
             board.oneNumberChoosen = false;
+            firstTurn = true;
         }
         static void Main(string[] args)
         {
-            Player erik = new Player() { Name = "erik", Score = 0 };
-            bool running = true;
-            while (running)
+            Player playerOne = new Player() { Name = "Erik", Score = 0 };
+            Player playerTwo = new Player() { Name = "Alex", Score = 0 };   
+            bool fullgameRunning = true;
+            while (fullgameRunning)
             {
-
-                ResetAfterThrow();
-                Console.Clear();
-                Console.WriteLine("Press enter to roll dices");
-                Console.ReadLine();
-                               
-                board.RollDices();               
-                board.CalculateOptions();            
-                MovePointer(erik);
+                for (int i = 0; i < 2; i++)
+                {
+                    StartGame(playerOne);
+                    StartGame(playerTwo);
+                }
             }
+            Player erik = new Player() { Name = "erik", Score = 0 };
+            StartGame(erik);
             Console.ReadLine();
+        }
+        public static void AddToFinal(Player player)
+        {
+
         }
     }
 }

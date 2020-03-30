@@ -104,11 +104,7 @@ namespace FlipGame
             firstRoll = rnd.Next(1, 7);
             secondRoll = rnd.Next(1, 7);
             totalRoll = (firstRoll + secondRoll);
-        }
-        public void SetUpNewTurn()
-        {
-            
-        }
+        }       
         public void CalculateValue(Player player)
         {
             int sum = 0;
