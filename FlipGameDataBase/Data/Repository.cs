@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Data.Entity;
-using System.Linq;
+using FlipGameDataBase.Models;
+
 
 namespace FlipGameDataBase.Data
 {
@@ -19,18 +18,28 @@ namespace FlipGameDataBase.Data
             context.Database.Log = (message) => Debug.WriteLine(message);
             return context;
         }
-
-        /// <summary>
-        /// Seeding Databasewith 100 Spaces if no exist return false
-        /// else returns true
-        /// </summary>
-        /// <returns>An IList collection of ComicBook entity instances.</returns>
-        public static bool SeedDatabase()
+        public static void AddPerson(Person person)
+        {
+            using(Context context = GetContext())
+            {
+                context.People.Add(person);
+                context.SaveChanges();
+            }
+        }
+        public static bool SearchForPerson(string name)
         {
             using (Context context = GetContext())
             {
-                return true;
+                foreach(var person in context.People)
+                {
+                    if (name.ToLower() == person.Name.ToLower())
+                    {
+                        return true;
+                    }
+                    else return false;
+                }
             }
+            return false;
         }
 
     }

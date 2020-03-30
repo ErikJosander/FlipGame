@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
+using FlipGameDataBase.Models;
 using FlipGameDataBase.Data;
-using System.Data.Entity;
 
 
 namespace FlipGame
@@ -121,43 +121,51 @@ namespace FlipGame
         }
         static void Main(string[] args)
         {
-
-            Repository.SeedDatabase();
-            Console.ReadLine();
-        }
-        public static int ReadIntInput(int range)
-        {
-            int toReturn = 0;
-            bool running = true;
-            while (running)
+            bool mainRunning = true;
+            while(mainRunning)
             {
-                int input;
-                var isInt = int.TryParse(Console.ReadLine(), out input);
-                if (!isInt)
+                Console.WriteLine("play game(1)");
+                Console.WriteLine("create player(2)");
+                Console.WriteLine("view players(3)");
+                var input = Helper.ReadIntInput(3);
+
+                switch (input)
                 {
-                    Console.WriteLine("Error: Not an int");
-                    continue;
-                }
-                if (input < 0 || input > range)
-                {
-                    Console.WriteLine("Error: out of range");
-                    continue;
-                }
-                if (isInt)
-                {
-                    toReturn = input;
-                    return toReturn;
+                    case (1):
+                        PlayGame();
+                        break;
+                    case (2):
+                        CreatePlayer();
+                        break;
+                    case (3):
+                        ShowListOfPlayer();
+                        break;
                 }
             }
-            return toReturn;
-        }
-
-        public static string ReadInput(string prompt, bool forceToLowercase = false)
+            Console.ReadLine();
+        }      
+        public static void CreatePlayer()
         {
-            Console.WriteLine();
-            Console.Write(prompt);
-            string input = Console.ReadLine();
-            return forceToLowercase ? input.ToLower() : input;
+            var player_username = Helper.ReadInput("Enter your user_name: ",true);
+            Person newPerson = new Person() { Name = player_username, CreatedOn = DateTime.Now };
+            if(Repository.SearchForPerson(player_username))
+            {
+                Console.WriteLine("Name allready exist");
+            }
+            else
+            {
+                Console.WriteLine("Perso Created");
+                Repository.AddPerson(newPerson);
+            }
+
+        }
+        public static void ShowListOfPlayer()
+        {
+
+        }
+        public static void PlayGame()
+        {
+            
         }
     }
 }
