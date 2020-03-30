@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using FlipGameDataBase.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Data.Entity;
 
 
 namespace FlipGameDataBase.Data
@@ -20,7 +23,7 @@ namespace FlipGameDataBase.Data
         }
         public static void AddPerson(Person person)
         {
-            using(Context context = GetContext())
+            using (Context context = GetContext())
             {
                 context.People.Add(person);
                 context.SaveChanges();
@@ -30,16 +33,30 @@ namespace FlipGameDataBase.Data
         {
             using (Context context = GetContext())
             {
-                foreach(var person in context.People)
+                var persons = context.People;
+                foreach (var person in persons)
                 {
                     if (name.ToLower() == person.Name.ToLower())
                     {
                         return true;
-                    }
-                    else return false;
+                    }                   
                 }
             }
             return false;
+        }
+        public static List<Person> GetListOfPersons()
+        {
+            var list = new List<Person>();
+            using (Context context = GetContext())
+            {
+                var persons = context.People;
+                foreach (var person in persons)
+                {
+                    list.Add(person);
+                }
+              
+            }
+            return list;
         }
 
     }

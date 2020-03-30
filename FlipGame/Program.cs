@@ -122,7 +122,7 @@ namespace FlipGame
         static void Main(string[] args)
         {
             bool mainRunning = true;
-            while(mainRunning)
+            while (mainRunning)
             {
                 Console.WriteLine("play game(1)");
                 Console.WriteLine("create player(2)");
@@ -143,29 +143,34 @@ namespace FlipGame
                 }
             }
             Console.ReadLine();
-        }      
+        }
         public static void CreatePlayer()
         {
-            var player_username = Helper.ReadInput("Enter your user_name: ",true);
+            var player_username = Helper.ReadInput("Enter your user_name: ", true);
             Person newPerson = new Person() { Name = player_username, CreatedOn = DateTime.Now };
-            if(Repository.SearchForPerson(player_username))
+            if (Repository.SearchForPerson(player_username))
             {
                 Console.WriteLine("Name allready exist");
             }
             else
             {
-                Console.WriteLine("Perso Created");
+                Console.WriteLine("Person Created");
                 Repository.AddPerson(newPerson);
             }
 
         }
         public static void ShowListOfPlayer()
         {
-
+            var list = Repository.GetListOfPersons();
+            foreach(var person in list)
+            {
+                Console.WriteLine($"{person.Name}");
+            }
+            Console.ReadLine();
         }
         public static void PlayGame()
         {
-            
+
         }
     }
 }
