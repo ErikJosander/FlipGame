@@ -118,22 +118,65 @@ namespace FlipGame
             firstTurn = true;
         }
         static void Main(string[] args)
-        {
-            Player playerOne = new Player() { Name = "Erik", Score = 0 };
-            Player playerTwo = new Player() { Name = "Alex", Score = 0 };   
-            bool fullgameRunning = true;
-            while (fullgameRunning)
+        {       
+            int input = ReadIntInput(2);
+            switch (input)
             {
-                for (int i = 0; i < 2; i++)
+                case 1:
+                    CreatePlayer();
+                    break;
+                case 2:
+                    CreateGame();
+                    break;              
+                default:
+                    break;
+            }
+
+            Console.ReadLine();
+        }
+        public static void CreatePlayer()
+        {           
+            var nameOfPLayer = ReadInput("Enter Name of player: ");
+
+        }
+        public static void CreateGame()
+        {
+
+        }
+        public static int ReadIntInput(int range)
+        {
+            int toReturn = 0;
+            bool running = true;
+            while (running)
+            {
+                int input;
+                var isInt = int.TryParse(Console.ReadLine(), out input);
+                if (!isInt)
                 {
-                    StartGame(playerOne);
-                    StartGame(playerTwo);
+                    Console.WriteLine("Error: Not an int");
+                    continue;
+                }
+                if (input < 0 || input > range)
+                {
+                    Console.WriteLine("Error: out of range");
+                    continue;
+                }
+                if (isInt)
+                {
+                    toReturn = input;
+                    return toReturn;
                 }
             }
-            Player erik = new Player() { Name = "erik", Score = 0 };
-            StartGame(erik);
-            Console.ReadLine();
-        }     
+            return toReturn;
+        }
+
+        public static string ReadInput(string prompt, bool forceToLowercase = false)
+        {
+            Console.WriteLine();
+            Console.Write(prompt);
+            string input = Console.ReadLine();
+            return forceToLowercase ? input.ToLower() : input;
+        }
     }
 }
 
