@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace FlipGame
 {
@@ -53,6 +54,39 @@ namespace FlipGame
                 }
             }
             return toReturn;
+        }
+
+        /// <summary>
+        /// Validates the string input of the regnumber
+        /// </summary>
+        /// <returns></returns>
+        public static bool InputValidation(string input)
+        {
+            List<string> uglywords = new List<string>();
+            uglywords.Add("Ugly");
+
+            if (input.Count() > 12)
+            {
+                return false;
+            }
+            if (string.IsNullOrEmpty(input))
+            {
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return false;
+            }
+            if (uglywords.Contains(input))
+            {
+                return false;
+            }
+            Regex r = new Regex("^[a-zA-Z0-9--]*$");
+            if (!r.IsMatch(input))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

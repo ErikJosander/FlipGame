@@ -12,6 +12,7 @@ namespace FlipGame
         public static bool pointerRunning = true;
         public static bool playerTurnEnded = false;
         public static bool firstTurn = true;
+        public static int MenuScrollerIs = 0;
         public static void MovePointer(Player player)
         {
             while (pointerRunning)
@@ -146,7 +147,21 @@ namespace FlipGame
         }
         public static void CreatePlayer()
         {
-            var player_username = Helper.ReadInput("Enter your user_name: ", true);
+            string player_username = "";
+            bool corretInput = false;
+            while (corretInput == false)
+            {
+                player_username = Helper.ReadInput("Enter your user_name: ", true);
+                if (Helper.InputValidation(player_username))
+                {
+                    corretInput = true;
+                }
+                else
+                {
+                    Console.WriteLine("Not valid");
+                }
+            }
+
             Person newPerson = new Person() { Name = player_username, CreatedOn = DateTime.Now };
             if (Repository.SearchForPerson(player_username))
             {
@@ -162,7 +177,7 @@ namespace FlipGame
         public static void ShowListOfPlayer()
         {
             var list = Repository.GetListOfPersons();
-            foreach(var person in list)
+            foreach (var person in list)
             {
                 Console.WriteLine($"{person.Name}");
             }
@@ -170,8 +185,145 @@ namespace FlipGame
         }
         public static void PlayGame()
         {
+            Console.WriteLine("Enter numbers of players (1-4)");
+            var numberOfPlayers = Helper.ReadIntInput(4);
+            ChoosePlayerMenu(numberOfPlayers);
+        }
 
+        public static void ChoosePlayerMenu(int numberOfPlayers)
+        {
+            bool menuRunning = true;
+            while (menuRunning)
+            {
+                bool insideRunning = true;
+                ConsoleKey ch = ConsoleKey.UpArrow;
+                while (insideRunning)
+                {
+                    ch = Console.ReadKey(false).Key;
+                    if (ch == ConsoleKey.DownArrow || ch == ConsoleKey.UpArrow || ch == ConsoleKey.Enter || ch == ConsoleKey.Q)
+                    { insideRunning = false; }
+                }
+                switch (ch)
+                {
+                    case (ConsoleKey.UpArrow):
+                        ShowMenu(ConsoleKey.UpArrow);
+                        break;
+                    case (ConsoleKey.DownArrow):
+                        ShowMenu(ConsoleKey.DownArrow);
+                        break;
+                    case (ConsoleKey.Enter):
+                        break;
+                    case (ConsoleKey.Q):
+                        menuRunning = false;
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+            Console.Clear();
+        }
+        public static void ShowMenu(ConsoleKey consoleKey)
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Press Q to Quit");
+            Console.WriteLine("Press Enter to Select User");
+            var list = Repository.GetListOfPersons();
+            int lengthOfScrolles = list.Count();
+            if (consoleKey == ConsoleKey.DownArrow)
+            {
+                if (MenuScrollerIs + 1 > lengthOfScrolles)
+                {
+
+                }
+                else
+                {
+                    MenuScrollerIs += 1;
+                }
+            }
+            if (consoleKey == ConsoleKey.UpArrow)
+            {
+                if (MenuScrollerIs == 0)
+                {
+
+                }
+                else
+                {
+                    MenuScrollerIs -= 1;
+                }
+            }
+
+            for (int i = MenuScrollerIs; i < MenuScrollerIs + 10; i++)
+            {
+                if(i == MenuScrollerIs)
+                {
+                    try
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine(list[i].Name);
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        Console.WriteLine("");
+                    }
+                }
+                else if (i + 1 == MenuScrollerIs || i - 1 == MenuScrollerIs)
+                {
+                    try
+                    {
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine(list[i].Name);
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        Console.WriteLine("");
+                    }
+                }
+                else if (i + 2 == MenuScrollerIs || i - 2 == MenuScrollerIs)
+                {
+                    try
+                    {
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.WriteLine(list[i].Name);
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        Console.WriteLine("");
+                    }
+                }
+                else if (i + 3 == MenuScrollerIs || i - 3 == MenuScrollerIs)
+                {
+                    try
+                    {
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.WriteLine(list[i].Name);
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        Console.WriteLine("");
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine(list[i].Name);
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        Console.WriteLine("");
+                    }
+                }             
+            }
         }
     }
 }
+
 

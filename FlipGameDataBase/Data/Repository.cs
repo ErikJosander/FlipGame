@@ -51,13 +51,12 @@ namespace FlipGameDataBase.Data
             {
                 var persons = context.People;
                 foreach (var person in persons)
-                {
+                { 
                     list.Add(person);
                 }
               
             }
             return list;
-        }
-
+        }     
     }
 }
