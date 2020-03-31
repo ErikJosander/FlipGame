@@ -2,7 +2,7 @@
 using System.Linq;
 using FlipGameDataBase.Models;
 using FlipGameDataBase.Data;
-
+using System.Collections.Generic;
 
 namespace FlipGame
 {
@@ -13,6 +13,7 @@ namespace FlipGame
         public static bool playerTurnEnded = false;
         public static bool firstTurn = true;
         public static int MenuScrollerIs = 0;
+        public static List<Person> listOfPlayers = new List<Person>();
         public static void MovePointer(Player player)
         {
             while (pointerRunning)
@@ -21,25 +22,25 @@ namespace FlipGame
                 ShowBoard(player);
 
                 bool insideRunning = true;
-                char x = 'a';
+                ConsoleKey x = ConsoleKey.UpArrow;
                 while (insideRunning)
                 {
-                    x = Console.ReadKey(true).KeyChar;
-                    if (x == 'a' || x == 'd' || x == 'o')
+                    x = Console.ReadKey(true).Key;
+                    if (x == ConsoleKey.LeftArrow || x == ConsoleKey.RightArrow || x == ConsoleKey.Enter)
                     { insideRunning = false; }
                 }
                 switch (x)
                 {
                     // Move Left
-                    case ('a'):
+                    case (ConsoleKey.LeftArrow):
                         board.PointerAction("a");
                         break;
                     // Move Right
-                    case ('d'):
+                    case (ConsoleKey.RightArrow):
                         board.PointerAction("d");
                         break;
                     // Press Action Button
-                    case ('o'):
+                    case (ConsoleKey.Enter):
                         board.PointerAction("o");
                         firstTurn = false;
 
@@ -188,10 +189,19 @@ namespace FlipGame
             Console.WriteLine("Enter numbers of players (1-4)");
             var numberOfPlayers = Helper.ReadIntInput(4);
             ChoosePlayerMenu(numberOfPlayers);
+            foreach(var person in listOfPlayers)
+            {
+                Player newPlayer = new Player() { Name = person.Name, Score = 0 };
+                Console.WriteLine($"{newPlayer.Name} turn");
+                StartGame(newPlayer);
+            }
+            Console.Clear();
         }
-
-        public static void ChoosePlayerMenu(int numberOfPlayers)
+        public static List<Person> ChoosePlayerMenu(int numberOfPlayers)
         {
+            Console.Clear();            
+            ShowMenu(ConsoleKey.UpArrow);
+            var users = Repository.GetListOfPersons();
             bool menuRunning = true;
             while (menuRunning)
             {
@@ -212,6 +222,18 @@ namespace FlipGame
                         ShowMenu(ConsoleKey.DownArrow);
                         break;
                     case (ConsoleKey.Enter):
+                        var person = users[MenuScrollerIs];
+                        if (listOfPlayers.Contains(person))
+                        {
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine("Can't add that person again");
+                            Console.WriteLine("Press enter to continue");
+                            Console.ReadLine();
+                        }
+                        else
+                        {
+                            listOfPlayers.Add(person);
+                        }
                         break;
                     case (ConsoleKey.Q):
                         menuRunning = false;
@@ -219,9 +241,13 @@ namespace FlipGame
                     default:
                         break;
                 }
-
+                if(listOfPlayers.Count == numberOfPlayers)
+                {
+                    menuRunning = false;
+                }
             }
             Console.Clear();
+            return listOfPlayers;
         }
         public static void ShowMenu(ConsoleKey consoleKey)
         {
@@ -229,6 +255,12 @@ namespace FlipGame
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Press Q to Quit");
             Console.WriteLine("Press Enter to Select User");
+            Console.Write("Selected players: ");
+            foreach (var person in listOfPlayers)
+            {
+                Console.Write($"{person.Name} ");
+            }
+            Console.WriteLine();
             var list = Repository.GetListOfPersons();
             int lengthOfScrolles = list.Count();
             if (consoleKey == ConsoleKey.DownArrow)
@@ -256,7 +288,28 @@ namespace FlipGame
 
             for (int i = MenuScrollerIs; i < MenuScrollerIs + 10; i++)
             {
-                if(i == MenuScrollerIs)
+                bool playerTaken = false;
+                foreach (var person in listOfPlayers)
+                {
+                    try
+                    {
+                        if ((person.Name) == list[i].Name)
+                        {
+                            playerTaken = true;
+                        }
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+
+                    }
+                }
+                if (playerTaken == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine(list[i].Name);
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else if (i == MenuScrollerIs && playerTaken == false)
                 {
                     try
                     {
@@ -320,8 +373,10 @@ namespace FlipGame
                     {
                         Console.WriteLine("");
                     }
-                }             
+                }
+
             }
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }
