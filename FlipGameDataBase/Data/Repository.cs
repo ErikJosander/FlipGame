@@ -39,7 +39,7 @@ namespace FlipGameDataBase.Data
                     if (name.ToLower() == person.Name.ToLower())
                     {
                         return true;
-                    }                   
+                    }
                 }
             }
             return false;
@@ -51,12 +51,29 @@ namespace FlipGameDataBase.Data
             {
                 var persons = context.People;
                 foreach (var person in persons)
-                { 
+                {
                     list.Add(person);
                 }
-              
             }
             return list;
-        }     
+        }
+
+        //public static void AddGameToDataBase(Dictionary<string, int> dict)
+        //{
+        //    using (Context context = GetContext())
+        //    {
+        //        Match match = new Match() { PlayedOn = DateTime.Now };
+        //        PersonsScore personsScore = new PersonsScore();
+        //        int count = 1;
+        //        foreach (var score in dict.OrderBy(key => key.Value))
+        //        {
+        //            if (count == 1)
+        //            {
+        //                personsScore.ScoreP1 = score.Value
+        //            }
+        //            count++;
+        //        }
+        //    }
+        //}
     }
 }

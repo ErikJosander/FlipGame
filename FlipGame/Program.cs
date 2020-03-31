@@ -122,7 +122,7 @@ namespace FlipGame
             firstTurn = true;
         }
         static void Main(string[] args)
-        {
+        {           
             bool mainRunning = true;
             while (mainRunning)
             {
@@ -226,8 +226,10 @@ namespace FlipGame
                         if (listOfPlayers.Contains(person))
                         {
                             Console.ForegroundColor = ConsoleColor.White;
+
                             Console.WriteLine("Can't add that person again");
                             Console.WriteLine("Press enter to continue");
+                            ShowMenu(ConsoleKey.Enter);
                             Console.ReadLine();
                         }
                         else
