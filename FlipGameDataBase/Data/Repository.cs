@@ -140,5 +140,39 @@ namespace FlipGameDataBase.Data
             }
             return personToFind;
         }
+        public static List<Temp> GetNumberOfGamesPerPlayer()
+        {
+            List<Temp> dict = new List<Temp>();
+            using (Context context = GetContext())
+            {
+                var people = context.People;
+                var personScores = context.PersonsScores;
+
+                var list = from scores in personScores                         
+                           join person in people on scores.PersonId                         
+                           equals person.Id
+                           select new
+                           {
+                               PersonName = person.Name,
+                               Score = scores.Place
+                           };
+
+
+                var newList = from x in list
+                              group x by x.PersonName into xGroup
+                              select new
+                              {
+                                  SumOfGames = xGroup.Count(),
+                                  Name = xGroup.Key                                  
+                              };
+
+                foreach(var x in newList)
+                {
+                    Temp temp = new Temp() { Name = x.Name, SumOfGames = x.SumOfGames };
+                    dict.Add(temp);
+                }
+            }
+            return dict;
+        }
     }
 }

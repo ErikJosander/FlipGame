@@ -129,7 +129,8 @@ namespace FlipGame
                 Console.WriteLine("play game(1)");
                 Console.WriteLine("create player(2)");
                 Console.WriteLine("view players(3)");
-                var input = Helper.ReadIntInput(3);
+                Console.WriteLine("view statistics(4)");
+                var input = Helper.ReadIntInput(4);
 
                 switch (input)
                 {
@@ -141,6 +142,9 @@ namespace FlipGame
                         break;
                     case (3):
                         ShowListOfPlayer();
+                        break;
+                    case (4):
+                        GamesPlayed();
                         break;
                 }
             }
@@ -251,6 +255,15 @@ namespace FlipGame
             }
             Console.Clear();
             return listOfPlayers;
+        }
+        public static void GamesPlayed()
+        {
+            var list = Repository.GetNumberOfGamesPerPlayer();
+            foreach(var x in list)
+            {
+                Console.WriteLine($"{x.Name} : {x.SumOfGames}");
+            }
+            Console.ReadLine();
         }
         public static void ShowMenu(ConsoleKey consoleKey)
         {
