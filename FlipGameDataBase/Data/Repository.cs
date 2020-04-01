@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using FlipGameDataBase.Models;
+using FlipGameDataBase.Data.Temps;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
@@ -116,7 +117,7 @@ namespace FlipGameDataBase.Data
                     };
                     AddPersonsScore(personsScore);
                     count++;
-                }              
+                }
             }
         }
         /// <summary>
@@ -148,8 +149,8 @@ namespace FlipGameDataBase.Data
                 var people = context.People;
                 var personScores = context.PersonsScores;
 
-                var list = from scores in personScores                         
-                           join person in people on scores.PersonId                         
+                var list = from scores in personScores
+                           join person in people on scores.PersonId
                            equals person.Id
                            select new
                            {
@@ -163,16 +164,68 @@ namespace FlipGameDataBase.Data
                               select new
                               {
                                   SumOfGames = xGroup.Count(),
-                                  Name = xGroup.Key                                  
+                                  Name = xGroup.Key
                               };
 
-                foreach(var x in newList)
+                foreach (var x in newList)
                 {
                     Temp temp = new Temp() { Name = x.Name, SumOfGames = x.SumOfGames };
                     dict.Add(temp);
                 }
             }
             return dict;
+        }
+        public static PlayerStatistics GetPlayerStatistics(Person person)
+        {
+            PlayerStatistics player = new PlayerStatistics();
+            using (Context context = GetContext())
+            {
+                var people = context.People;
+                var personScores = context.PersonsScores;
+                var matches = context.Matches;
+
+                var list = from scores in personScores
+                           join x in people on scores.PersonId
+                           equals x.Id
+                           join y in matches on scores.MatchId
+                           equals y.Id
+                           select new
+                           {
+                               PersonName = x.Name,
+                               Place = scores.Place,
+                               Score = scores.Score
+                           };
+
+
+                var sumOfGamesList = from x in list
+                                     group x by x.PersonName into xGroup
+                                     select new
+                                     {
+                                         name = xGroup.Key,
+                                         SumOfGames = xGroup.Count(),
+                                         TotalScore = xGroup.Sum(c => c.Score),
+                                         FirstPlace = xGroup.Count(f=>f.Place == 1),
+                                         SecondPlace = xGroup.Count(f=>f.Place == 2),
+                                         ThirdPlace = xGroup.Count(f=>f.Place == 3),
+                                         FourthPlace = xGroup.Count(f=>f.Place == 4)
+                                        
+                                     };
+                foreach (var x in sumOfGamesList)
+                {
+                    if(x.name == person.Name)
+                    {
+                        player.Name = x.name;
+                        player.CreatedOn = person.CreatedOn;
+                        player.TotalGames = x.SumOfGames;
+                        player.TotScore = x.TotalScore;
+                        player.FirsPlaceSum = x.FirstPlace;
+                        player.SecondPlaceSum = x.SecondPlace;
+                        player.ThirdPlaceSum = x.ThirdPlace;
+                        player.FourthPlaceSum = x.FourthPlace;
+                    }
+                }
+                return player;
+            }
         }
     }
 }

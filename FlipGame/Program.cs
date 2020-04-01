@@ -122,7 +122,7 @@ namespace FlipGame
             firstTurn = true;
         }
         static void Main(string[] args)
-        {           
+        {
             bool mainRunning = true;
             while (mainRunning)
             {
@@ -130,7 +130,8 @@ namespace FlipGame
                 Console.WriteLine("create player(2)");
                 Console.WriteLine("view players(3)");
                 Console.WriteLine("view statistics(4)");
-                var input = Helper.ReadIntInput(4);
+                Console.WriteLine("view player statistics(5)");
+                var input = Helper.ReadIntInput(5);
 
                 switch (input)
                 {
@@ -145,6 +146,9 @@ namespace FlipGame
                         break;
                     case (4):
                         GamesPlayed();
+                        break;
+                    case (5):
+                        GetStatisticsByPlayer();
                         break;
                 }
             }
@@ -194,11 +198,11 @@ namespace FlipGame
             var numberOfPlayers = Helper.ReadIntInput(4);
             ChoosePlayerMenu(numberOfPlayers);
             List<Player> CurrentGameList = new List<Player>();
-            foreach(var person in listOfPlayers)
+            foreach (var person in listOfPlayers)
             {
                 Player newPlayer = new Player() { Name = person.Name, Score = 0 };
                 Console.WriteLine($"{newPlayer.Name} turn");
-                StartGame(newPlayer);               
+                StartGame(newPlayer);
                 CurrentGameList.Add(newPlayer);
             }
             SaveGameToDataBase(CurrentGameList);
@@ -206,7 +210,7 @@ namespace FlipGame
         }
         public static List<Person> ChoosePlayerMenu(int numberOfPlayers)
         {
-            Console.Clear();            
+            Console.Clear();
             ShowMenu(ConsoleKey.UpArrow);
             var users = Repository.GetListOfPersons();
             bool menuRunning = true;
@@ -234,7 +238,7 @@ namespace FlipGame
                         {
                             Console.ForegroundColor = ConsoleColor.White;
                             Console.WriteLine("Can't add that person again");
-                            Console.WriteLine("Press enter to continue");                          
+                            Console.WriteLine("Press enter to continue");
                             Console.ReadLine();
                         }
                         else
@@ -248,7 +252,7 @@ namespace FlipGame
                     default:
                         break;
                 }
-                if(listOfPlayers.Count == numberOfPlayers)
+                if (listOfPlayers.Count == numberOfPlayers)
                 {
                     menuRunning = false;
                 }
@@ -259,7 +263,7 @@ namespace FlipGame
         public static void GamesPlayed()
         {
             var list = Repository.GetNumberOfGamesPerPlayer();
-            foreach(var x in list)
+            foreach (var x in list)
             {
                 Console.WriteLine($"{x.Name} : {x.SumOfGames}");
             }
@@ -397,12 +401,35 @@ namespace FlipGame
         public static void SaveGameToDataBase(List<Player> players)
         {
             Dictionary<Person, int> personAndScoreDict = new Dictionary<Person, int>();
-            foreach(var player in players)
+            foreach (var player in players)
             {
                 var person = Repository.GetPersonFromName(player.Name);
                 personAndScoreDict.Add(person, player.Score);
             }
             Repository.AddGameToDataBase(personAndScoreDict);
+        }
+        public static void GetStatisticsByPlayer()
+        {
+            Console.WriteLine("Enter username: ");
+            var name = Helper.ReadInput("");
+            if (Repository.SearchForPerson(name))
+            {
+                var user = Repository.GetPersonFromName(name);
+                var player = Repository.GetPlayerStatistics(user);
+                Console.WriteLine($"Name: {player.Name}");
+                Console.WriteLine($"Created on: {player.CreatedOn}");
+                Console.WriteLine($"Total games: {player.TotalGames}");
+                Console.WriteLine($"Total score: {player.TotScore}");
+                Console.WriteLine($"Times first: {player.FirsPlaceSum}");
+                Console.WriteLine($"Times second: {player.SecondPlaceSum}");
+                Console.WriteLine($"Times third: {player.ThirdPlaceSum}");
+                Console.WriteLine($"Times Fourth: {player.FourthPlaceSum}");
+            }
+            else
+            {
+                Console.WriteLine("Not found");
+                Console.ReadLine();
+            }
         }
     }
 }
