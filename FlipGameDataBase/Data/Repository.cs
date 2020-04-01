@@ -21,6 +21,10 @@ namespace FlipGameDataBase.Data
             context.Database.Log = (message) => Debug.WriteLine(message);
             return context;
         }
+        /// <summary>
+        /// Adds Person to database
+        /// </summary>
+        /// <param name="person"></param>
         public static void AddPerson(Person person)
         {
             using (Context context = GetContext())
@@ -29,7 +33,10 @@ namespace FlipGameDataBase.Data
                 context.SaveChanges();
             }
         }
-
+        /// <summary>
+        /// Adds Match to database
+        /// </summary>
+        /// <param name="match"></param>
         public static void AddMatch(Match match)
         {
             using (Context context = GetContext())
@@ -38,6 +45,10 @@ namespace FlipGameDataBase.Data
                 context.SaveChanges();
             }
         }
+        /// <summary>
+        /// Adds PersonsScore to database
+        /// </summary>
+        /// <param name="personsScore"></param>
         public static void AddPersonsScore(PersonsScore personsScore)
         {
             using (Context context = GetContext())
@@ -46,6 +57,11 @@ namespace FlipGameDataBase.Data
                 context.SaveChanges();
             }
         }
+        /// <summary>
+        /// Searches for a persons by string name in the People table 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static bool SearchForPerson(string name)
         {
             using (Context context = GetContext())
@@ -61,6 +77,10 @@ namespace FlipGameDataBase.Data
             }
             return false;
         }
+        /// <summary>
+        /// returns a list of person with all the people in PeopleTable
+        /// </summary>
+        /// <returns></returns>
         public static List<Person> GetListOfPersons()
         {
             var list = new List<Person>();
@@ -74,7 +94,10 @@ namespace FlipGameDataBase.Data
             }
             return list;
         }
-
+        /// <summary>
+        /// Sorts a game and then adds it to the database with scorePerson aswell
+        /// </summary>
+        /// <param name="dict"></param>
         public static void AddGameToDataBase(Dictionary<Person, int> dict)
         {
             using (Context context = GetContext())
@@ -96,7 +119,11 @@ namespace FlipGameDataBase.Data
                 }              
             }
         }
-
+        /// <summary>
+        /// Returns a Person
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static Person GetPersonFromName(string name)
         {
             Person personToFind = new Person();
