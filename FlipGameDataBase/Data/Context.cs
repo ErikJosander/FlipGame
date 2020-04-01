@@ -12,7 +12,8 @@ namespace FlipGameDataBase.Data
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<Context>());
         }
         public DbSet<Person> People { get; set; }
-        public DbSet<Score> Scores { get; set; }
+        public DbSet<Match> Matches { get; set; }
+        public DbSet<PersonsScore> PersonsScores { get; set; }
 
     }
 }

@@ -54,8 +54,9 @@
   <ItemGroup>
     <Compile Include="Data\Context.cs" />
     <Compile Include="Data\Repository.cs" />
-    <Compile Include="Models\Persons.cs" />
-    <Compile Include="Models\Score.cs" />
+    <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\PersonsScore.cs" />
+    <Compile Include="Models\Match.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

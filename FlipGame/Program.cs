@@ -189,12 +189,15 @@ namespace FlipGame
             Console.WriteLine("Enter numbers of players (1-4)");
             var numberOfPlayers = Helper.ReadIntInput(4);
             ChoosePlayerMenu(numberOfPlayers);
+            List<Player> CurrentGameList = new List<Player>();
             foreach(var person in listOfPlayers)
             {
                 Player newPlayer = new Player() { Name = person.Name, Score = 0 };
                 Console.WriteLine($"{newPlayer.Name} turn");
-                StartGame(newPlayer);
+                StartGame(newPlayer);               
+                CurrentGameList.Add(newPlayer);
             }
+            SaveGameToDataBase(CurrentGameList);
             Console.Clear();
         }
         public static List<Person> ChoosePlayerMenu(int numberOfPlayers)
@@ -226,10 +229,8 @@ namespace FlipGame
                         if (listOfPlayers.Contains(person))
                         {
                             Console.ForegroundColor = ConsoleColor.White;
-
                             Console.WriteLine("Can't add that person again");
-                            Console.WriteLine("Press enter to continue");
-                            ShowMenu(ConsoleKey.Enter);
+                            Console.WriteLine("Press enter to continue");                          
                             Console.ReadLine();
                         }
                         else
@@ -379,6 +380,16 @@ namespace FlipGame
 
             }
             Console.ForegroundColor = ConsoleColor.White;
+        }
+        public static void SaveGameToDataBase(List<Player> players)
+        {
+            Dictionary<Person, int> personAndScoreDict = new Dictionary<Person, int>();
+            foreach(var player in players)
+            {
+                var person = Repository.GetPersonFromName(player.Name);
+                personAndScoreDict.Add(person, player.Score);
+            }
+            Repository.AddGameToDataBase(personAndScoreDict);
         }
     }
 }

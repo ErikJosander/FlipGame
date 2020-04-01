@@ -29,6 +29,23 @@ namespace FlipGameDataBase.Data
                 context.SaveChanges();
             }
         }
+
+        public static void AddMatch(Match match)
+        {
+            using (Context context = GetContext())
+            {
+                context.Matches.Add(match);
+                context.SaveChanges();
+            }
+        }
+        public static void AddPersonsScore(PersonsScore personsScore)
+        {
+            using (Context context = GetContext())
+            {
+                context.PersonsScores.Add(personsScore);
+                context.SaveChanges();
+            }
+        }
         public static bool SearchForPerson(string name)
         {
             using (Context context = GetContext())
@@ -58,22 +75,43 @@ namespace FlipGameDataBase.Data
             return list;
         }
 
-        //public static void AddGameToDataBase(Dictionary<string, int> dict)
-        //{
-        //    using (Context context = GetContext())
-        //    {
-        //        Match match = new Match() { PlayedOn = DateTime.Now };
-        //        PersonsScore personsScore = new PersonsScore();
-        //        int count = 1;
-        //        foreach (var score in dict.OrderBy(key => key.Value))
-        //        {
-        //            if (count == 1)
-        //            {
-        //                personsScore.ScoreP1 = score.Value
-        //            }
-        //            count++;
-        //        }
-        //    }
-        //}
+        public static void AddGameToDataBase(Dictionary<Person, int> dict)
+        {
+            using (Context context = GetContext())
+            {
+                Match match = new Match() { PlayedOn = DateTime.Now };
+                AddMatch(match);
+                int count = 1;
+                foreach (var score in dict.OrderBy(key => key.Value))
+                {
+                    PersonsScore personsScore = new PersonsScore()
+                    {
+                        MatchId = match.Id,
+                        PersonId = score.Key.Id,
+                        Score = score.Value,
+                        Place = count
+                    };
+                    AddPersonsScore(personsScore);
+                    count++;
+                }              
+            }
+        }
+
+        public static Person GetPersonFromName(string name)
+        {
+            Person personToFind = new Person();
+            using (Context context = GetContext())
+            {
+                var persons = context.People;
+                foreach (var person in persons)
+                {
+                    if (name.ToLower() == person.Name.ToLower())
+                    {
+                        return person;
+                    }
+                }
+            }
+            return personToFind;
+        }
     }
 }
