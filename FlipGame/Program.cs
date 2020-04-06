@@ -3,6 +3,7 @@ using System.Linq;
 using FlipGameDataBase.Models;
 using FlipGameDataBase.Data;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace FlipGame
 {
@@ -14,6 +15,9 @@ namespace FlipGame
         public static bool firstTurn = true;
         public static int MenuScrollerIs = 0;
         public static List<Person> listOfPlayers = new List<Person>();
+        public static bool loading = true;
+        public static Thread treadOne = new Thread(Loading);
+
         public static void MovePointer(Player player)
         {
             while (pointerRunning)
@@ -122,7 +126,7 @@ namespace FlipGame
             firstTurn = true;
         }
         static void Main(string[] args)
-        {
+        {           
             bool mainRunning = true;
             while (mainRunning)
             {
@@ -208,12 +212,23 @@ namespace FlipGame
             SaveGameToDataBase(CurrentGameList);
             Console.Clear();
         }
+        public static void Loading()
+        {
+            while(loading)
+            {
+                Console.WriteLine("Loading");
+                Thread.Sleep(10);
+                Console.Clear();
+            }      
+        }
         public static List<Person> ChoosePlayerMenu(int numberOfPlayers)
         {
             Console.Clear();
-            ShowMenu(ConsoleKey.UpArrow);
+            treadOne.Start();            
             var users = Repository.GetListOfPersons();
-            bool menuRunning = true;
+            loading = false;
+            ShowMenu(ConsoleKey.UpArrow);
+            bool menuRunning = true;           
             while (menuRunning)
             {
                 bool insideRunning = true;
@@ -431,6 +446,7 @@ namespace FlipGame
                 Console.ReadLine();
             }
         }
+
     }
 }
 
