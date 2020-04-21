@@ -217,8 +217,9 @@ namespace FlipGame
             while(loading)
             {
                 Console.WriteLine("Loading");
-                Thread.Sleep(10);
+                Thread.Sleep(400);
                 Console.Clear();
+                Thread.Sleep(400);
             }      
         }
         public static List<Person> ChoosePlayerMenu(int numberOfPlayers)
@@ -446,7 +447,6 @@ namespace FlipGame
                 Console.ReadLine();
             }
         }
-
     }
 }
 

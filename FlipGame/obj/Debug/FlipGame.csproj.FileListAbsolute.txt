@@ -12,3 +12,4 @@ C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\obj\Debug\FlipGame.c
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\bin\Debug\FlipGameDataBase.dll
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\bin\Debug\FlipGameDataBase.pdb
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\bin\Debug\FlipGameDataBase.dll.config
+C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGame\obj\Debug\FlipGame.csproj.CoreCompileInputs.cache

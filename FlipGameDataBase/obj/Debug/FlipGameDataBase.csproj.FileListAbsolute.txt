@@ -9,3 +9,4 @@ C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGameDataBase\obj\Debug\Fl
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGameDataBase\obj\Debug\FlipGameDataBase.csproj.CopyComplete
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGameDataBase\obj\Debug\FlipGameDataBase.dll
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGameDataBase\obj\Debug\FlipGameDataBase.pdb
+C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipGameDataBase\obj\Debug\FlipGameDataBase.csproj.CoreCompileInputs.cache
