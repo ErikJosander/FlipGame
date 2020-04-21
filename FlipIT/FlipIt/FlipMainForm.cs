@@ -13,23 +13,29 @@ namespace FlipIt
 {
     public partial class FlipMainForm : Form
     {
-        
+
         public static Random rnd = new Random();
         public static List<string> diceRolls = new List<string>();
         public List<PlayersAndScore> playersThisTurn;
-        public static List<ButtonToChoose> choiceButton = new List<ButtonToChoose>();      
+        public static List<ButtonToChoose> choiceButton = new List<ButtonToChoose>();
         public static List<Button> formButtons = new List<Button>();
         public static int totalRoll;
 
         public FlipMainForm(List<Person> players)
         {
-            InitializeComponent();         
+            InitializeComponent();
             playersThisTurn = ConvertPersonsToPlayers(players);
             dicePictureOne.Visible = false;
             dicePictureTwo.Visible = false;
+            SeedButtonList();
+            Mediator.GetInstance().ButtonPressed += (s, e) =>
+            {
+                BindColorData(e.Button);
+            };
+
             ResetGame();
-            WireUpLists();        
-        }      
+            WireUpLists();
+        }
         private List<PlayersAndScore> ConvertPersonsToPlayers(List<Person> people)
         {
             List<PlayersAndScore> output = new List<PlayersAndScore>();
@@ -42,13 +48,18 @@ namespace FlipIt
             }
             return output;
         }
+        private void BindColorData(ButtonToChoose button)
+        {
+            //TODO TEST
+            programLabel.Text = "Changed";
+            button.Taken = true;
+            ColorOfButtons();
+        }
         private void ResetGame()
         {
-            formButtons.Clear();
             choiceButton.Clear();
-           
             for (int i = 1; i < 10; i++)
-            {        
+            {
                 var button = new ButtonToChoose();
                 button.Number = i;
                 button.Taken = false;
@@ -64,13 +75,13 @@ namespace FlipIt
         }
         private void ColorOfButtons()
         {
-            int i = 1;
+            int i = 0;
             foreach (Button b in formButtons)
             {
-                if (choiceButton[i - 1].Taken)
+                if (choiceButton[i].Taken)
                 {
                     b.BackColor = Color.IndianRed;
-                }              
+                }
                 else
                 {
                     b.BackColor = Color.Green;
@@ -124,33 +135,23 @@ namespace FlipIt
                 if (s == Pictures.diceSideSix) { output.Add(6); }
             }
             return output;
-        }     
-        private void button1_Click(object sender, EventArgs e)
-        {
-          
         }
-
-
+        private void SeedButtonList()
+        {
+            formButtons.Add(button1);
+            formButtons.Add(button2);
+            formButtons.Add(button3);
+            formButtons.Add(button4);
+            formButtons.Add(button5);
+            formButtons.Add(button6);
+            formButtons.Add(button7);
+            formButtons.Add(button8);
+            formButtons.Add(button9);
+        }
         private void FlipMainWindow_Load(object sender, EventArgs e)
         {
 
         }
-
-        private void programLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void scoreListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -165,7 +166,23 @@ namespace FlipIt
             var intDiceRolls = ConvertStringToInt(diceRolls);
             totalRoll = intDiceRolls[0] + intDiceRolls[1];
             totalRollLabel.Visible = true;
-            totalRollLabel.Text = $"Total roll: {totalRoll}";        
+            totalRollLabel.Text = $"Total roll: {totalRoll}";
+        }
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Mediator.GetInstance().OnButtonPressed(this, choiceButton[0]);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Mediator.GetInstance().OnButtonPressed(this, choiceButton[1]);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Mediator.GetInstance().OnButtonPressed(this, choiceButton[2]);
         }
     }
 }

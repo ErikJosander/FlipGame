@@ -209,6 +209,7 @@
             this.button3.TabIndex = 2;
             this.button3.Text = "3";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button7
             // 
@@ -237,6 +238,7 @@
             this.button2.TabIndex = 2;
             this.button2.Text = "2";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button6
             // 
@@ -265,6 +267,7 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "1";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // rollDiceButton
             // 
@@ -313,7 +316,7 @@
             this.scoreListBox.ItemHeight = 32;
             this.scoreListBox.Location = new System.Drawing.Point(75, 82);
             this.scoreListBox.Name = "scoreListBox";
-            this.scoreListBox.Size = new System.Drawing.Size(370, 516);
+            this.scoreListBox.Size = new System.Drawing.Size(338, 516);
             this.scoreListBox.TabIndex = 9;
             this.scoreListBox.SelectedIndexChanged += new System.EventHandler(this.scoreListBox_SelectedIndexChanged);
             // 
@@ -325,7 +328,7 @@
             this.playersTurnLabel.Font = new System.Drawing.Font("Arial", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playersTurnLabel.Location = new System.Drawing.Point(122, 9);
             this.playersTurnLabel.Name = "playersTurnLabel";
-            this.playersTurnLabel.Size = new System.Drawing.Size(278, 46);
+            this.playersTurnLabel.Size = new System.Drawing.Size(246, 46);
             this.playersTurnLabel.TabIndex = 8;
             this.playersTurnLabel.Text = "playersTurnLabel";
             // 

@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ButtonPressedEventArgs.cs" />
     <Compile Include="ButtonToChoose.cs" />
     <Compile Include="CreateNewPlayerForm.cs">
       <SubType>Form</SubType>
@@ -69,6 +70,7 @@
     <Compile Include="FlipMainForm.Designer.cs">
       <DependentUpon>FlipMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mediator.cs" />
     <Compile Include="PictureEnums.cs" />
     <Compile Include="PlayersAndScore.cs" />
     <Compile Include="Program.cs" />
