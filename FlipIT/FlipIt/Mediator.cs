@@ -14,7 +14,6 @@ namespace FlipIt
         {
             return _Instance;
         }
-
         // instance func
         public EventHandler<ButtonPressedEventArgs> ButtonPressed;
         public void OnButtonPressed(object sender, ButtonToChoose button)
@@ -23,6 +22,17 @@ namespace FlipIt
             if(buttonPressedDelegate != null)
             {
                 buttonPressedDelegate(sender, new ButtonPressedEventArgs { Button = button});
+            }
+        }
+
+
+        public EventHandler<TurnFinishedEventArgs> TurnFinished;
+        public void OnTurnFinished(object sender, List<int> availibleNumbers)
+        {
+            var turnFinsihedDelegate = TurnFinished as EventHandler<TurnFinishedEventArgs>;
+            if (turnFinsihedDelegate != null)
+            {
+                turnFinsihedDelegate(sender, new TurnFinishedEventArgs { AvailibleNumbers = availibleNumbers });
             }
         }
     }

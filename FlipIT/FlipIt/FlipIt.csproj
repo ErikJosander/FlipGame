@@ -81,6 +81,7 @@
     <Compile Include="StartForm.Designer.cs">
       <DependentUpon>StartForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TurnFinishedEventArgs.cs" />
     <EmbeddedResource Include="CreateNewPlayerForm.resx">
       <DependentUpon>CreateNewPlayerForm.cs</DependentUpon>
     </EmbeddedResource>

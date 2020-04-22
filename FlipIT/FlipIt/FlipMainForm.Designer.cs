@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FlipMainForm));
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.numbersToChooseFromList = new System.Windows.Forms.ListBox();
             this.dicePictureOne = new System.Windows.Forms.PictureBox();
             this.dicePictureTwo = new System.Windows.Forms.PictureBox();
             this.clickBoxGroup = new System.Windows.Forms.GroupBox();
@@ -48,6 +49,7 @@
             this.programLabel = new System.Windows.Forms.Label();
             this.scoreListBox = new System.Windows.Forms.ListBox();
             this.playersTurnLabel = new System.Windows.Forms.Label();
+            this.numbersAvailibel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -75,10 +77,12 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.numbersToChooseFromList);
             this.splitContainer1.Panel1.Controls.Add(this.dicePictureOne);
             this.splitContainer1.Panel1.Controls.Add(this.dicePictureTwo);
             this.splitContainer1.Panel1.Controls.Add(this.clickBoxGroup);
             this.splitContainer1.Panel1.Controls.Add(this.rollDiceButton);
+            this.splitContainer1.Panel1.Controls.Add(this.numbersAvailibel);
             this.splitContainer1.Panel1.Controls.Add(this.totalRollLabel);
             this.splitContainer1.Panel1.Controls.Add(this.programLabel);
             this.splitContainer1.Panel1MinSize = 180;
@@ -92,6 +96,15 @@
             this.splitContainer1.SplitterDistance = 548;
             this.splitContainer1.SplitterWidth = 20;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // numbersToChooseFromList
+            // 
+            this.numbersToChooseFromList.FormattingEnabled = true;
+            this.numbersToChooseFromList.ItemHeight = 16;
+            this.numbersToChooseFromList.Location = new System.Drawing.Point(434, 38);
+            this.numbersToChooseFromList.Name = "numbersToChooseFromList";
+            this.numbersToChooseFromList.Size = new System.Drawing.Size(72, 196);
+            this.numbersToChooseFromList.TabIndex = 17;
             // 
             // dicePictureOne
             // 
@@ -153,6 +166,7 @@
             this.button5.TabIndex = 2;
             this.button5.Text = "5";
             this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button9
             // 
@@ -167,6 +181,7 @@
             this.button9.TabIndex = 2;
             this.button9.Text = "9";
             this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button4
             // 
@@ -181,6 +196,7 @@
             this.button4.TabIndex = 2;
             this.button4.Text = "4";
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button8
             // 
@@ -195,6 +211,7 @@
             this.button8.TabIndex = 2;
             this.button8.Text = "8";
             this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button3
             // 
@@ -224,6 +241,7 @@
             this.button7.TabIndex = 2;
             this.button7.Text = "7";
             this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button2
             // 
@@ -253,6 +271,7 @@
             this.button6.TabIndex = 2;
             this.button6.Text = "6";
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button1
             // 
@@ -316,7 +335,7 @@
             this.scoreListBox.ItemHeight = 32;
             this.scoreListBox.Location = new System.Drawing.Point(75, 82);
             this.scoreListBox.Name = "scoreListBox";
-            this.scoreListBox.Size = new System.Drawing.Size(338, 516);
+            this.scoreListBox.Size = new System.Drawing.Size(306, 516);
             this.scoreListBox.TabIndex = 9;
             this.scoreListBox.SelectedIndexChanged += new System.EventHandler(this.scoreListBox_SelectedIndexChanged);
             // 
@@ -328,9 +347,20 @@
             this.playersTurnLabel.Font = new System.Drawing.Font("Arial", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playersTurnLabel.Location = new System.Drawing.Point(122, 9);
             this.playersTurnLabel.Name = "playersTurnLabel";
-            this.playersTurnLabel.Size = new System.Drawing.Size(246, 46);
+            this.playersTurnLabel.Size = new System.Drawing.Size(214, 46);
             this.playersTurnLabel.TabIndex = 8;
             this.playersTurnLabel.Text = "playersTurnLabel";
+            // 
+            // numbersAvailibel
+            // 
+            this.numbersAvailibel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.numbersAvailibel.AutoSize = true;
+            this.numbersAvailibel.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numbersAvailibel.Location = new System.Drawing.Point(407, 9);
+            this.numbersAvailibel.Name = "numbersAvailibel";
+            this.numbersAvailibel.Size = new System.Drawing.Size(138, 19);
+            this.numbersAvailibel.TabIndex = 11;
+            this.numbersAvailibel.Text = "Availibel Numbers";
             // 
             // FlipMainForm
             // 
@@ -379,6 +409,8 @@
         public System.Windows.Forms.Label programLabel;
         public System.Windows.Forms.ListBox scoreListBox;
         public System.Windows.Forms.Label playersTurnLabel;
+        private System.Windows.Forms.ListBox numbersToChooseFromList;
+        public System.Windows.Forms.Label numbersAvailibel;
     }
 }
 
