@@ -1,4 +1,5 @@
-﻿using FlipGameDataBase.Models;
+﻿using FlipGameDataBase.Data;
+using FlipGameDataBase.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,7 @@ namespace FlipIt
 {
     public partial class FlipMainForm : Form
     {
+        // TODO FIX BUG WITH DICEROLL BUTTON
         public static Random rnd = new Random();
         public List<string> diceRolls = new List<string>();
         public List<PlayersAndScore> playersThisTurn;
@@ -26,22 +28,15 @@ namespace FlipIt
         public bool threeNumbersChoosen = false;
         public int firstChoice = 0;
         public int secondChoice = 0;
-        public int turns = 0;
         public PlayersAndScore whoIsPlaying;
 
         public FlipMainForm(List<Person> players)
         {
             InitializeComponent();
-            turns = players.Count();
             totalRollLabel.Text = "";
             playersThisTurn = ConvertPersonsToPlayers(players);
             whoIsPlaying = playersThisTurn[0];
-            playersTurnLabel.Text = whoIsPlaying.Name;
-            dicePictureOne.Visible = false;
-            dicePictureTwo.Visible = false;
-            SeedButtonList();
-            SeedChoiceButton();
-            WireUpLists();
+            ResetGame();
             Mediator.GetInstance().ButtonPressed += (s, e) =>
             {
                 BindColorData(e.Button);
@@ -64,35 +59,28 @@ namespace FlipIt
             return output;
         }
         private void EvaluateIfturnFinnished(List<int> availibleNumbers)
-        {
-            var lastItem = playersThisTurn.LastOrDefault();
+        {          
             if (availibleNumbers.Count == 0)
             {
-                if (whoIsPlaying.Name == lastItem.Name)
+                var lastPlayer = playersThisTurn.LastOrDefault();
+                if(whoIsPlaying == lastPlayer)
                 {
-                    MessageBox.Show("Game finished");
+                    whoIsPlaying.Score += ReturnTurnScore();
+                    WireUpLists();
+                    var winner = playersThisTurn.OrderBy(x => x.Score).FirstOrDefault();
+                    SaveGameToDataBase(playersThisTurn);
+                    MessageBox.Show($"Winner: {winner.Name}");
+                    this.Close();
                 }
                 else
                 {
+                    MessageBox.Show("Turns Finished");
+                    whoIsPlaying.Score += ReturnTurnScore();
+                    WireUpLists();
                     var indexOfWhoIsPlaying = playersThisTurn.IndexOf(whoIsPlaying);
-                    MessageBox.Show($"{whoIsPlaying.Name}s turn finnished");
                     whoIsPlaying = playersThisTurn[indexOfWhoIsPlaying + 1];
-                    playersTurnLabel.Text = whoIsPlaying.Name;
+                    ResetGame();
                 }
-            }
-        }
-        private void DisableAllButtons()
-        {
-            foreach (var b in formButtons)
-            {
-                b.Enabled = false;
-            }
-        }
-        private void EnableAllButtons()
-        {
-            foreach (var b in formButtons)
-            {
-                b.Enabled = true;
             }
         }
         private void BindColorData(ButtonToChoose button)
@@ -132,7 +120,7 @@ namespace FlipIt
                         numbersToChooseFrom.Clear();
                         DisableAllButtons();
                         UpdateNumbersToChooseList();
-                        ColorOfButtons();                       
+                        ColorOfButtons();
                         rollDiceButton.Enabled = true;
                     }
                     else
@@ -144,7 +132,6 @@ namespace FlipIt
                         numbersToChooseFrom = CalculateOptions();
                         ColorOfButtons();
                         UpdateNumbersToChooseList();
-
                     }
                 }
             }
@@ -156,14 +143,59 @@ namespace FlipIt
                     {
                         button.Taken = true;
                         numbersToChooseFrom.Clear();
+                        threeNumbersChoosen = true;
                         DisableAllButtons();
                         ColorOfButtons();
                         UpdateNumbersToChooseList();
-                        rollDiceButton.Enabled = true;
-                    }                 
+                    }
                 }
             }
+            if (threeNumbersChoosen)
+            {
+                rollDiceButton.Enabled = true;
+
+            }
+            // TODO add more ifs-statments if player choose more the 3 numbers
         }
+        private int ReturnTurnScore()
+        {
+            int output = 0;
+            foreach (var b in choiceButton)
+            {
+                if (!b.Taken)
+                {
+                    output += b.Number;
+                }
+            }
+            return output;
+        }
+        private void ResetGame()
+        {
+            playersTurnLabel.Text = whoIsPlaying.Name;        
+            dicePictureOne.Visible = false;
+            dicePictureTwo.Visible = false;
+            
+            SeedButtonList();
+            numbersToChooseFrom.Clear();          
+            totalRollLabel.Text = "";
+            SeedChoiceButton();
+            WireUpLists();
+            ColorOfButtons();         
+        }
+        private void DisableAllButtons()
+        {
+            foreach (var b in formButtons)
+            {
+                b.Enabled = false;
+            }
+        }
+        private void EnableAllButtons()
+        {
+            foreach (var b in formButtons)
+            {
+                b.Enabled = true;
+            }
+        }      
         private void SeedChoiceButton()
         {
             choiceButton.Clear();
@@ -250,6 +282,7 @@ namespace FlipIt
         }
         private void SeedButtonList()
         {
+            formButtons.Clear();
             formButtons.Add(button1);
             formButtons.Add(button2);
             formButtons.Add(button3);
@@ -269,7 +302,7 @@ namespace FlipIt
 
         }
         private void rollDiceButton_Click_1(object sender, EventArgs e)
-        {
+        {          
             oneNumberChoosen = false;
             twoNumbersChoosen = false;
             threeNumbersChoosen = false;
@@ -291,7 +324,7 @@ namespace FlipIt
             ColorOfButtons();
             Mediator.GetInstance().OnTurnFinished(this, numbersToChooseFrom);
             UpdateNumbersToChooseList();
-            rollDiceButton.Enabled = false;
+            
         }
         private List<int> CalculateOptions()
         {
@@ -342,8 +375,18 @@ namespace FlipIt
             }
             return output.Distinct().ToList();
         }
-        private void UpdateNumbersToChooseList()
+        private static void SaveGameToDataBase(List<PlayersAndScore> players)
         {
+            Dictionary<Person, int> personAndScoreDict = new Dictionary<Person, int>();
+            foreach (var player in players)
+            {
+                var person = Repository.GetPersonFromName(player.Name);
+                personAndScoreDict.Add(person, player.Score);
+            }
+            Repository.AddGameToDataBase(personAndScoreDict);
+        }
+        private void UpdateNumbersToChooseList()
+        {           
             numbersToChooseFromList.DataSource = null;
             numbersToChooseFromList.DataSource = numbersToChooseFrom;
             foreach (var x in numbersToChooseFrom)

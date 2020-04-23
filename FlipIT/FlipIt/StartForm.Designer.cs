@@ -92,6 +92,7 @@
             this.linkLabelCreateNewPlayer.TabIndex = 5;
             this.linkLabelCreateNewPlayer.TabStop = true;
             this.linkLabelCreateNewPlayer.Text = "Create New Player";
+            this.linkLabelCreateNewPlayer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelCreateNewPlayer_LinkClicked);
             // 
             // addPlayerButton
             // 

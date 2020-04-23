@@ -58,11 +58,11 @@
   <ItemGroup>
     <Compile Include="ButtonPressedEventArgs.cs" />
     <Compile Include="ButtonToChoose.cs" />
-    <Compile Include="CreateNewPlayerForm.cs">
+    <Compile Include="CreateUserForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreateNewPlayerForm.Designer.cs">
-      <DependentUpon>CreateNewPlayerForm.cs</DependentUpon>
+    <Compile Include="CreateUserForm.Designer.cs">
+      <DependentUpon>CreateUserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FlipMainForm.cs">
       <SubType>Form</SubType>
@@ -70,6 +70,7 @@
     <Compile Include="FlipMainForm.Designer.cs">
       <DependentUpon>FlipMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="IPersonRequester.cs" />
     <Compile Include="Mediator.cs" />
     <Compile Include="PictureEnums.cs" />
     <Compile Include="PlayersAndScore.cs" />
@@ -82,8 +83,8 @@
       <DependentUpon>StartForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TurnFinishedEventArgs.cs" />
-    <EmbeddedResource Include="CreateNewPlayerForm.resx">
-      <DependentUpon>CreateNewPlayerForm.cs</DependentUpon>
+    <EmbeddedResource Include="CreateUserForm.resx">
+      <DependentUpon>CreateUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FlipMainForm.resx">
       <DependentUpon>FlipMainForm.cs</DependentUpon>

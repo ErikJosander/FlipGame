@@ -60,6 +60,7 @@ namespace FlipGameDataBase.Data
         }
         /// <summary>
         /// Searches for a persons by string name in the People table 
+        /// Return True if it's a find
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>

@@ -24,8 +24,6 @@ namespace FlipIt
                 buttonPressedDelegate(sender, new ButtonPressedEventArgs { Button = button});
             }
         }
-
-
         public EventHandler<TurnFinishedEventArgs> TurnFinished;
         public void OnTurnFinished(object sender, List<int> availibleNumbers)
         {

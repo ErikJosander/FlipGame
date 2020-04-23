@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace FlipIt
 {
-    public partial class StartForm : Form
+    public partial class StartForm : Form, IPersonRequester
     {
         public List<Person> players = Repository.GetListOfPersons();
         public List<Person> selectedPlayers = new List<Person>();
@@ -77,8 +77,20 @@ namespace FlipIt
             else
             {
                 FlipMainForm fmf = new FlipMainForm(selectedPlayers);
-                fmf.Show();
+                fmf.Show();             
             }
+        }
+
+        private void linkLabelCreateNewPlayer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var cuf = new CreateUserForm(this);
+            cuf.Show();
+        }
+
+        public void PersonComplete(Person p)
+        {
+            selectedPlayers.Add(p);
+            WireUpLists();
         }
     }
 }

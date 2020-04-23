@@ -29,7 +29,6 @@ C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipIT\FlipIt\bin\Debug\FlipG
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipIT\FlipIt\bin\Debug\EntityFramework.xml
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipIT\FlipIt\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipIT\FlipIt\obj\Debug\FlipIt.csprojAssemblyReference.cache
-C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipIT\FlipIt\obj\Debug\FlipIt.CreateNewPlayerForm.resources
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipIT\FlipIt\obj\Debug\FlipIt.FlipMainForm.resources
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipIT\FlipIt\obj\Debug\FlipIt.Properties.Resources.resources
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipIT\FlipIt\obj\Debug\FlipIt.StartForm.resources
@@ -38,3 +37,4 @@ C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipIT\FlipIt\obj\Debug\FlipI
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipIT\FlipIt\obj\Debug\FlipIt.csproj.CopyComplete
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipIT\FlipIt\obj\Debug\FlipIt.exe
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipIT\FlipIt\obj\Debug\FlipIt.pdb
+C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipIT\FlipIt\obj\Debug\FlipIt.CreateUserForm.resources
