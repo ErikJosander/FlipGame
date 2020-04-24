@@ -135,16 +135,25 @@ namespace FlipIt
                     }
                 }
             }
-            if (oneNumberChoosen && twoNumbersChoosen)
+            if (oneNumberChoosen && twoNumbersChoosen && !threeNumbersChoosen)
             {
                 if (numbersToChooseFrom.Contains(button.Number) && !button.Taken)
                 {
                     if (button.Number == totalRoll)
                     {
                         button.Taken = true;
+                        numbersToChooseFrom.Clear();                       
+                        DisableAllButtons();
+                        ColorOfButtons();
+                        UpdateNumbersToChooseList();
+                    }
+                    else
+                    {
+                        button.Taken = true;
                         numbersToChooseFrom.Clear();
                         threeNumbersChoosen = true;
-                        DisableAllButtons();
+                        numbersToChooseFrom.Clear();
+                        numbersToChooseFrom = CalculateOptions();
                         ColorOfButtons();
                         UpdateNumbersToChooseList();
                     }
@@ -152,7 +161,17 @@ namespace FlipIt
             }
             if (threeNumbersChoosen)
             {
-                rollDiceButton.Enabled = true;
+                if (numbersToChooseFrom.Contains(button.Number) && !button.Taken)
+                {
+                    if (button.Number == totalRoll)
+                    {
+                        button.Taken = true;
+                        numbersToChooseFrom.Clear();
+                        DisableAllButtons();
+                        ColorOfButtons();
+                        UpdateNumbersToChooseList();
+                    }
+                }
 
             }
             // TODO add more ifs-statments if player choose more the 3 numbers
@@ -429,6 +448,6 @@ namespace FlipIt
         private void button9_Click(object sender, EventArgs e)
         {
             Mediator.GetInstance().OnButtonPressed(this, choiceButton[8]);
-        }
+        }   
     }
 }

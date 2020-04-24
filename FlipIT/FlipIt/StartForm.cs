@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,13 +16,13 @@ namespace FlipIt
     public partial class StartForm : Form, IPersonRequester
     {
         public List<Person> players = Repository.GetListOfPersons();
-        public List<Person> selectedPlayers = new List<Person>();
+        public List<Person> selectedPlayers = new List<Person>();   
         public StartForm()
         {
-            InitializeComponent();
+            InitializeComponent();                              
             WireUpLists();
         }
-
+      
         private void WireUpLists()
         {
             dropDownOfPlayers.DataSource = null;
@@ -37,7 +38,6 @@ namespace FlipIt
         {
 
         }
-
         private void addPlayerButton_Click(object sender, EventArgs e)
         {
             Person p = (Person)dropDownOfPlayers.SelectedItem;
@@ -52,7 +52,6 @@ namespace FlipIt
                 MessageBox.Show("Maximum of 4 players");
             }
         }
-
         private void removePlayerButton_Click(object sender, EventArgs e)
         {
             Person p = (Person)selectedPlayerListBox.SelectedItem;
@@ -67,30 +66,33 @@ namespace FlipIt
                 MessageBox.Show("Error");
             }
         }
-
         private void startGame_Button_Click(object sender, EventArgs e)
         {
-            if(selectedPlayers.Count == 0)
+            if (selectedPlayers.Count == 0)
             {
                 MessageBox.Show("To few players");
             }
             else
             {
-                FlipMainForm fmf = new FlipMainForm(selectedPlayers);
-                fmf.Show();             
+                FlipMainForm fmf = new FlipMainForm(selectedPlayers);            
+                fmf.Show();
             }
         }
-
         private void linkLabelCreateNewPlayer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var cuf = new CreateUserForm(this);
             cuf.Show();
         }
-
         public void PersonComplete(Person p)
         {
             selectedPlayers.Add(p);
             WireUpLists();
+        }
+
+        private void statisticsLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var ssf = new ShowStatisticsForm();
+            ssf.Show();
         }
     }
 }

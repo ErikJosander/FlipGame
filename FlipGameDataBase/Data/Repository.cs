@@ -205,15 +205,15 @@ namespace FlipGameDataBase.Data
                                          name = xGroup.Key,
                                          SumOfGames = xGroup.Count(),
                                          TotalScore = xGroup.Sum(c => c.Score),
-                                         FirstPlace = xGroup.Count(f=>f.Place == 1),
-                                         SecondPlace = xGroup.Count(f=>f.Place == 2),
-                                         ThirdPlace = xGroup.Count(f=>f.Place == 3),
-                                         FourthPlace = xGroup.Count(f=>f.Place == 4)
-                                        
+                                         FirstPlace = xGroup.Count(f => f.Place == 1),
+                                         SecondPlace = xGroup.Count(f => f.Place == 2),
+                                         ThirdPlace = xGroup.Count(f => f.Place == 3),
+                                         FourthPlace = xGroup.Count(f => f.Place == 4)
+
                                      };
                 foreach (var x in sumOfGamesList)
                 {
-                    if(x.name == person.Name)
+                    if (x.name == person.Name)
                     {
                         player.Name = x.name;
                         player.CreatedOn = person.CreatedOn;
@@ -227,6 +227,62 @@ namespace FlipGameDataBase.Data
                 }
                 return player;
             }
+        }
+        public static List<Match> GetBetweenDatesMatches(DateTime startDate, DateTime endDate)
+        {
+            List<Match> output = new List<Match>();
+            using (Context context = GetContext())
+            {
+                var matches = context.Matches;
+
+                output = matches.Where(x => x.PlayedOn > startDate).Where(x => x.PlayedOn < endDate).ToList();
+            }
+            return output;
+        }     
+        public static Match GetMatchFromDate(DateTime dt)
+        {
+            using (Context contex = GetContext())
+            {
+                var matches = contex.Matches;
+                var match = new Match();
+                foreach(var m in matches)
+                {
+                    if(m.PlayedOn.ToString() == dt.ToString())
+                    { return m; }
+                }
+                return match;
+            }
+        }
+        public static MatchWithPersons GetScoreAndPersonsFromMatch(Match match)
+        {
+            var output = new MatchWithPersons();
+            using (Context context = GetContext())
+            {
+                var people = context.People;
+                var scores = context.PersonsScores;
+
+                var query = from x in scores
+                           join y in people on x.PersonId
+                           equals y.Id where x.MatchId == match.Id                
+                           select new
+                           {
+                               PersonName = y.Name,
+                               Score = x.Score,
+                               Place = x.Place
+                           };
+                output.PlayedOn = match.PlayedOn;
+                foreach(var p in query)
+                {
+                    TempPerson tempPerson = new TempPerson();
+                    tempPerson.Name = p.PersonName;
+                    tempPerson.Score = p.Score;
+                    tempPerson.Place = p.Place;
+                    output.PeoplePlaceScore.Add(tempPerson);
+                    
+                }
+            
+            }
+            return output;
         }
     }
 }

@@ -35,6 +35,7 @@
             this.linkLabelCreateNewPlayer = new System.Windows.Forms.LinkLabel();
             this.addPlayerButton = new System.Windows.Forms.Button();
             this.removePlayerButton = new System.Windows.Forms.Button();
+            this.statisticsLink = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // programLabel
@@ -42,9 +43,9 @@
             this.programLabel.Font = new System.Drawing.Font("Arial", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.programLabel.Location = new System.Drawing.Point(46, 28);
             this.programLabel.Name = "programLabel";
-            this.programLabel.Size = new System.Drawing.Size(273, 38);
+            this.programLabel.Size = new System.Drawing.Size(143, 38);
             this.programLabel.TabIndex = 1;
-            this.programLabel.Text = "Choose Players";
+            this.programLabel.Text = "FLIPIT";
             // 
             // startGame_Button
             // 
@@ -86,6 +87,7 @@
             // linkLabelCreateNewPlayer
             // 
             this.linkLabelCreateNewPlayer.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabelCreateNewPlayer.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabelCreateNewPlayer.Location = new System.Drawing.Point(49, 90);
             this.linkLabelCreateNewPlayer.Name = "linkLabelCreateNewPlayer";
             this.linkLabelCreateNewPlayer.Size = new System.Drawing.Size(177, 23);
@@ -117,12 +119,26 @@
             this.removePlayerButton.UseVisualStyleBackColor = true;
             this.removePlayerButton.Click += new System.EventHandler(this.removePlayerButton_Click);
             // 
+            // statisticsLink
+            // 
+            this.statisticsLink.AutoSize = true;
+            this.statisticsLink.Font = new System.Drawing.Font("Arial", 12F);
+            this.statisticsLink.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.statisticsLink.Location = new System.Drawing.Point(335, 90);
+            this.statisticsLink.Name = "statisticsLink";
+            this.statisticsLink.Size = new System.Drawing.Size(90, 23);
+            this.statisticsLink.TabIndex = 8;
+            this.statisticsLink.TabStop = true;
+            this.statisticsLink.Text = "Statistics";
+            this.statisticsLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.statisticsLink_LinkClicked);
+            // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(511, 634);
+            this.Controls.Add(this.statisticsLink);
             this.Controls.Add(this.programLabel);
             this.Controls.Add(this.removePlayerButton);
             this.Controls.Add(this.addPlayerButton);
@@ -134,17 +150,19 @@
             this.Name = "StartForm";
             this.Text = "StartWindow";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label programLabel;
+        public System.Windows.Forms.Label programLabel;
         private System.Windows.Forms.Button startGame_Button;
         private System.Windows.Forms.ListBox selectedPlayerListBox;
         private System.Windows.Forms.ComboBox dropDownOfPlayers;
         private System.Windows.Forms.LinkLabel linkLabelCreateNewPlayer;
         private System.Windows.Forms.Button addPlayerButton;
         private System.Windows.Forms.Button removePlayerButton;
+        private System.Windows.Forms.LinkLabel statisticsLink;
     }
 }
