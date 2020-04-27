@@ -238,7 +238,7 @@ namespace FlipGameDataBase.Data
                 output = matches.Where(x => x.PlayedOn > startDate).Where(x => x.PlayedOn < endDate).ToList();
             }
             return output;
-        }
+        }    
         public static Match GetMatchFromDate(DateTime dt)
         {
             using (Context contex = GetContext())
@@ -252,6 +252,38 @@ namespace FlipGameDataBase.Data
                 }
                 return match;
             }
+        }
+        public static List<Match> GetMatchesFromName(string name)
+        {
+            Person p = GetPersonFromName(name);
+            List<Match> output = new List<Match>();
+            using(Context context = GetContext())
+            {
+               
+                var scores = context.PersonsScores;
+                var newList = scores.Where(a => a.PersonId == p.Id).ToList();
+                var matches = context.Matches;
+                var query = from x in newList
+                            join y in matches on x.MatchId
+                            equals y.Id
+                            select new
+                            {
+                                Matchid = y.Id
+                            };
+                List<int> templist = new List<int>();
+                foreach(var x in query)
+                {
+                    templist.Add(x.Matchid);
+                }
+                foreach(var t in matches)
+                {
+                    if(templist.Contains(t.Id))
+                    {
+                        output.Add(t);
+                    }
+                }
+            }
+            return output;
         }
         public static MatchWithPersons GetScoreAndPersonsFromMatch(Match match)
         {

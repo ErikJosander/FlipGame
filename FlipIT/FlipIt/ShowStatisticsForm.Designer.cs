@@ -36,6 +36,9 @@
             this.endDateLabel = new System.Windows.Forms.Label();
             this.selectedNodeMatch = new System.Windows.Forms.Button();
             this.specificMatchListBox = new System.Windows.Forms.ListBox();
+            this.nameSearchInput = new System.Windows.Forms.TextBox();
+            this.nameSearchButton = new System.Windows.Forms.Button();
+            this.getAllPlayerButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // treeViewMatches
@@ -76,11 +79,11 @@
             this.getMatchesButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.getMatchesButton.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.getMatchesButton.Location = new System.Drawing.Point(478, 132);
+            this.getMatchesButton.Location = new System.Drawing.Point(398, 128);
             this.getMatchesButton.MaximumSize = new System.Drawing.Size(200, 70);
             this.getMatchesButton.MinimumSize = new System.Drawing.Size(190, 58);
             this.getMatchesButton.Name = "getMatchesButton";
-            this.getMatchesButton.Size = new System.Drawing.Size(200, 70);
+            this.getMatchesButton.Size = new System.Drawing.Size(190, 70);
             this.getMatchesButton.TabIndex = 2;
             this.getMatchesButton.Text = "Get Matches";
             this.getMatchesButton.UseVisualStyleBackColor = true;
@@ -129,16 +132,51 @@
             this.specificMatchListBox.ItemHeight = 16;
             this.specificMatchListBox.Location = new System.Drawing.Point(398, 223);
             this.specificMatchListBox.Name = "specificMatchListBox";
-            this.specificMatchListBox.Size = new System.Drawing.Size(389, 260);
+            this.specificMatchListBox.Size = new System.Drawing.Size(389, 196);
             this.specificMatchListBox.TabIndex = 6;
             this.specificMatchListBox.DoubleClick += new System.EventHandler(this.specificMatchListBox_DoubleClick);
-
+            // 
+            // nameSearchInput
+            // 
+            this.nameSearchInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.nameSearchInput.Location = new System.Drawing.Point(600, 128);
+            this.nameSearchInput.Name = "nameSearchInput";
+            this.nameSearchInput.Size = new System.Drawing.Size(178, 22);
+            this.nameSearchInput.TabIndex = 7;
+            // 
+            // nameSearchButton
+            // 
+            this.nameSearchButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.nameSearchButton.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameSearchButton.Location = new System.Drawing.Point(600, 156);
+            this.nameSearchButton.Name = "nameSearchButton";
+            this.nameSearchButton.Size = new System.Drawing.Size(178, 41);
+            this.nameSearchButton.TabIndex = 8;
+            this.nameSearchButton.Text = "Name Search";
+            this.nameSearchButton.UseVisualStyleBackColor = true;
+            this.nameSearchButton.Click += new System.EventHandler(this.nameSearchButton_Click);
+            // 
+            // getAllPlayerButton
+            // 
+            this.getAllPlayerButton.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.getAllPlayerButton.Location = new System.Drawing.Point(398, 426);
+            this.getAllPlayerButton.Name = "getAllPlayerButton";
+            this.getAllPlayerButton.Size = new System.Drawing.Size(389, 64);
+            this.getAllPlayerButton.TabIndex = 9;
+            this.getAllPlayerButton.Text = "All Payers";
+            this.getAllPlayerButton.UseVisualStyleBackColor = true;
+            this.getAllPlayerButton.Click += new System.EventHandler(this.getAllPlayerButton_Click);
             // 
             // ShowStatisticsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(818, 502);
+            this.Controls.Add(this.getAllPlayerButton);
+            this.Controls.Add(this.nameSearchButton);
+            this.Controls.Add(this.nameSearchInput);
             this.Controls.Add(this.specificMatchListBox);
             this.Controls.Add(this.selectedNodeMatch);
             this.Controls.Add(this.endDateLabel);
@@ -166,5 +204,8 @@
         private System.Windows.Forms.Label endDateLabel;
         private System.Windows.Forms.Button selectedNodeMatch;
         private System.Windows.Forms.ListBox specificMatchListBox;
+        private System.Windows.Forms.TextBox nameSearchInput;
+        private System.Windows.Forms.Button nameSearchButton;
+        private System.Windows.Forms.Button getAllPlayerButton;
     }
 }

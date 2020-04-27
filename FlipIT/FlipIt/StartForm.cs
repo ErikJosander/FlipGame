@@ -21,8 +21,7 @@ namespace FlipIt
         {
             InitializeComponent();                              
             WireUpLists();
-        }
-      
+        }    
         private void WireUpLists()
         {
             dropDownOfPlayers.DataSource = null;
@@ -94,13 +93,11 @@ namespace FlipIt
             selectedPlayers.Add(p);
             WireUpLists();
         }
-
         private void statisticsLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var ssf = new ShowStatisticsForm();
             ssf.Show();
         }
-
         private void deletePLayerLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var duf = new DeleteUserForm();

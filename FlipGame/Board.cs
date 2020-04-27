@@ -76,7 +76,6 @@ namespace FlipGame
                     numbersToChooseFrom.Add(x);
                 }
             }
-
             foreach (var x in boardNumbers)
             {
                 foreach (var y in boardNumbers)
