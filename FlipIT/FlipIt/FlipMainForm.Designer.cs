@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FlipMainForm));
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.numbersToChooseFromList = new System.Windows.Forms.ListBox();
+            this.evaluateButton = new System.Windows.Forms.Button();
             this.dicePictureOne = new System.Windows.Forms.PictureBox();
             this.dicePictureTwo = new System.Windows.Forms.PictureBox();
             this.clickBoxGroup = new System.Windows.Forms.GroupBox();
@@ -49,7 +49,6 @@
             this.programLabel = new System.Windows.Forms.Label();
             this.scoreListBox = new System.Windows.Forms.ListBox();
             this.playersTurnLabel = new System.Windows.Forms.Label();
-            this.numbersAvailibel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -77,12 +76,11 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.numbersToChooseFromList);
+            this.splitContainer1.Panel1.Controls.Add(this.evaluateButton);
             this.splitContainer1.Panel1.Controls.Add(this.dicePictureOne);
             this.splitContainer1.Panel1.Controls.Add(this.dicePictureTwo);
             this.splitContainer1.Panel1.Controls.Add(this.clickBoxGroup);
             this.splitContainer1.Panel1.Controls.Add(this.rollDiceButton);
-            this.splitContainer1.Panel1.Controls.Add(this.numbersAvailibel);
             this.splitContainer1.Panel1.Controls.Add(this.totalRollLabel);
             this.splitContainer1.Panel1.Controls.Add(this.programLabel);
             this.splitContainer1.Panel1MinSize = 180;
@@ -97,14 +95,19 @@
             this.splitContainer1.SplitterWidth = 20;
             this.splitContainer1.TabIndex = 1;
             // 
-            // numbersToChooseFromList
+            // evaluateButton
             // 
-            this.numbersToChooseFromList.FormattingEnabled = true;
-            this.numbersToChooseFromList.ItemHeight = 16;
-            this.numbersToChooseFromList.Location = new System.Drawing.Point(434, 38);
-            this.numbersToChooseFromList.Name = "numbersToChooseFromList";
-            this.numbersToChooseFromList.Size = new System.Drawing.Size(72, 196);
-            this.numbersToChooseFromList.TabIndex = 17;
+            this.evaluateButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.evaluateButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.evaluateButton.Font = new System.Drawing.Font("Arial", 25.8F);
+            this.evaluateButton.Location = new System.Drawing.Point(270, 432);
+            this.evaluateButton.Name = "evaluateButton";
+            this.evaluateButton.Size = new System.Drawing.Size(261, 187);
+            this.evaluateButton.TabIndex = 18;
+            this.evaluateButton.Text = "End Turn";
+            this.evaluateButton.UseVisualStyleBackColor = true;
+            this.evaluateButton.Click += new System.EventHandler(this.evaluateButton_Click);
             // 
             // dicePictureOne
             // 
@@ -147,9 +150,9 @@
             this.clickBoxGroup.Controls.Add(this.button2);
             this.clickBoxGroup.Controls.Add(this.button6);
             this.clickBoxGroup.Controls.Add(this.button1);
-            this.clickBoxGroup.Location = new System.Drawing.Point(9, 240);
+            this.clickBoxGroup.Location = new System.Drawing.Point(16, 240);
             this.clickBoxGroup.Name = "clickBoxGroup";
-            this.clickBoxGroup.Size = new System.Drawing.Size(522, 171);
+            this.clickBoxGroup.Size = new System.Drawing.Size(515, 171);
             this.clickBoxGroup.TabIndex = 14;
             this.clickBoxGroup.TabStop = false;
             // 
@@ -158,7 +161,7 @@
             this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.button5.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button5.Location = new System.Drawing.Point(385, 36);
+            this.button5.Location = new System.Drawing.Point(381, 36);
             this.button5.MaximumSize = new System.Drawing.Size(74, 55);
             this.button5.MinimumSize = new System.Drawing.Size(74, 55);
             this.button5.Name = "button5";
@@ -173,7 +176,7 @@
             this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.button9.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button9.Location = new System.Drawing.Point(341, 97);
+            this.button9.Location = new System.Drawing.Point(337, 97);
             this.button9.MaximumSize = new System.Drawing.Size(74, 55);
             this.button9.MinimumSize = new System.Drawing.Size(74, 55);
             this.button9.Name = "button9";
@@ -188,7 +191,7 @@
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.button4.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button4.Location = new System.Drawing.Point(305, 36);
+            this.button4.Location = new System.Drawing.Point(301, 36);
             this.button4.MaximumSize = new System.Drawing.Size(74, 55);
             this.button4.MinimumSize = new System.Drawing.Size(74, 55);
             this.button4.Name = "button4";
@@ -203,7 +206,7 @@
             this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.button8.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button8.Location = new System.Drawing.Point(261, 97);
+            this.button8.Location = new System.Drawing.Point(257, 97);
             this.button8.MaximumSize = new System.Drawing.Size(74, 55);
             this.button8.MinimumSize = new System.Drawing.Size(74, 55);
             this.button8.Name = "button8";
@@ -218,7 +221,7 @@
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.button3.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button3.Location = new System.Drawing.Point(225, 36);
+            this.button3.Location = new System.Drawing.Point(221, 36);
             this.button3.MaximumSize = new System.Drawing.Size(74, 55);
             this.button3.MinimumSize = new System.Drawing.Size(74, 55);
             this.button3.Name = "button3";
@@ -233,7 +236,7 @@
             this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.button7.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button7.Location = new System.Drawing.Point(181, 97);
+            this.button7.Location = new System.Drawing.Point(177, 97);
             this.button7.MaximumSize = new System.Drawing.Size(74, 55);
             this.button7.MinimumSize = new System.Drawing.Size(74, 55);
             this.button7.Name = "button7";
@@ -248,7 +251,7 @@
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.button2.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button2.Location = new System.Drawing.Point(145, 36);
+            this.button2.Location = new System.Drawing.Point(141, 36);
             this.button2.MaximumSize = new System.Drawing.Size(74, 55);
             this.button2.MinimumSize = new System.Drawing.Size(74, 55);
             this.button2.Name = "button2";
@@ -263,7 +266,7 @@
             this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.button6.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button6.Location = new System.Drawing.Point(101, 97);
+            this.button6.Location = new System.Drawing.Point(97, 97);
             this.button6.MaximumSize = new System.Drawing.Size(74, 55);
             this.button6.MinimumSize = new System.Drawing.Size(74, 55);
             this.button6.Name = "button6";
@@ -278,7 +281,7 @@
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button1.Location = new System.Drawing.Point(65, 36);
+            this.button1.Location = new System.Drawing.Point(61, 36);
             this.button1.MaximumSize = new System.Drawing.Size(74, 55);
             this.button1.MinimumSize = new System.Drawing.Size(74, 55);
             this.button1.Name = "button1";
@@ -297,7 +300,7 @@
             this.rollDiceButton.Font = new System.Drawing.Font("Arial", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rollDiceButton.Location = new System.Drawing.Point(16, 432);
             this.rollDiceButton.Name = "rollDiceButton";
-            this.rollDiceButton.Size = new System.Drawing.Size(515, 187);
+            this.rollDiceButton.Size = new System.Drawing.Size(248, 187);
             this.rollDiceButton.TabIndex = 13;
             this.rollDiceButton.Text = "Roll Dice";
             this.rollDiceButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -335,7 +338,7 @@
             this.scoreListBox.ItemHeight = 32;
             this.scoreListBox.Location = new System.Drawing.Point(75, 82);
             this.scoreListBox.Name = "scoreListBox";
-            this.scoreListBox.Size = new System.Drawing.Size(306, 516);
+            this.scoreListBox.Size = new System.Drawing.Size(258, 516);
             this.scoreListBox.TabIndex = 9;
             this.scoreListBox.SelectedIndexChanged += new System.EventHandler(this.scoreListBox_SelectedIndexChanged);
             // 
@@ -347,20 +350,9 @@
             this.playersTurnLabel.Font = new System.Drawing.Font("Arial", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playersTurnLabel.Location = new System.Drawing.Point(122, 9);
             this.playersTurnLabel.Name = "playersTurnLabel";
-            this.playersTurnLabel.Size = new System.Drawing.Size(214, 46);
+            this.playersTurnLabel.Size = new System.Drawing.Size(166, 46);
             this.playersTurnLabel.TabIndex = 8;
             this.playersTurnLabel.Text = "playersTurnLabel";
-            // 
-            // numbersAvailibel
-            // 
-            this.numbersAvailibel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.numbersAvailibel.AutoSize = true;
-            this.numbersAvailibel.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numbersAvailibel.Location = new System.Drawing.Point(407, 9);
-            this.numbersAvailibel.Name = "numbersAvailibel";
-            this.numbersAvailibel.Size = new System.Drawing.Size(138, 19);
-            this.numbersAvailibel.TabIndex = 11;
-            this.numbersAvailibel.Text = "Availibel Numbers";
             // 
             // FlipMainForm
             // 
@@ -409,8 +401,7 @@
         public System.Windows.Forms.Label programLabel;
         public System.Windows.Forms.ListBox scoreListBox;
         public System.Windows.Forms.Label playersTurnLabel;
-        private System.Windows.Forms.ListBox numbersToChooseFromList;
-        public System.Windows.Forms.Label numbersAvailibel;
+        private System.Windows.Forms.Button evaluateButton;
     }
 }
 

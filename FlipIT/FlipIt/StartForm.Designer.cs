@@ -36,6 +36,7 @@
             this.addPlayerButton = new System.Windows.Forms.Button();
             this.removePlayerButton = new System.Windows.Forms.Button();
             this.statisticsLink = new System.Windows.Forms.LinkLabel();
+            this.deletePLayerLink = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // programLabel
@@ -132,12 +133,29 @@
             this.statisticsLink.Text = "Statistics";
             this.statisticsLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.statisticsLink_LinkClicked);
             // 
+            // deletePLayerLink
+            // 
+            this.deletePLayerLink.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.deletePLayerLink.AutoSize = true;
+            this.deletePLayerLink.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.deletePLayerLink.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deletePLayerLink.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.deletePLayerLink.Location = new System.Drawing.Point(160, 454);
+            this.deletePLayerLink.Name = "deletePLayerLink";
+            this.deletePLayerLink.Size = new System.Drawing.Size(93, 16);
+            this.deletePLayerLink.TabIndex = 9;
+            this.deletePLayerLink.TabStop = true;
+            this.deletePLayerLink.Text = "Delete Player";
+            this.deletePLayerLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.deletePLayerLink_LinkClicked);
+            // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(511, 634);
+            this.Controls.Add(this.deletePLayerLink);
             this.Controls.Add(this.statisticsLink);
             this.Controls.Add(this.programLabel);
             this.Controls.Add(this.removePlayerButton);
@@ -164,5 +182,6 @@
         private System.Windows.Forms.Button addPlayerButton;
         private System.Windows.Forms.Button removePlayerButton;
         private System.Windows.Forms.LinkLabel statisticsLink;
+        private System.Windows.Forms.LinkLabel deletePLayerLink;
     }
 }

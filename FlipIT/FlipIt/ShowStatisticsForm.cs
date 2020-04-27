@@ -33,8 +33,9 @@ namespace FlipIt
 
         }
         private void getMatchesButton_Click(object sender, EventArgs e)
-        {
+        {          
             currentMatches.Clear();
+            treeViewMatches.Nodes.Clear();
             var startDate = dateTimePicker1.Value;
             var endDate = dateTimePicker2.Value;
 

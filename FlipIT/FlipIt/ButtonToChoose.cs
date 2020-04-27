@@ -10,6 +10,6 @@ namespace FlipIt
     {
         public int Number { get; set; }
         public bool Taken { get; set; }
-        
+        public bool TakenOneTurn { get; set; }        
     }
 }

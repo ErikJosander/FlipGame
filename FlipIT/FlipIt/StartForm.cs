@@ -73,9 +73,15 @@ namespace FlipIt
                 MessageBox.Show("To few players");
             }
             else
-            {
-                FlipMainForm fmf = new FlipMainForm(selectedPlayers);            
-                fmf.Show();
+            {              
+                FlipMainForm fmf = new FlipMainForm(selectedPlayers);               
+                fmf.Show();                          
+                foreach (var p in selectedPlayers)
+                {
+                    players.Add(p);
+                }              
+                selectedPlayers.Clear();
+                WireUpLists();
             }
         }
         private void linkLabelCreateNewPlayer_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -93,6 +99,12 @@ namespace FlipIt
         {
             var ssf = new ShowStatisticsForm();
             ssf.Show();
+        }
+
+        private void deletePLayerLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var duf = new DeleteUserForm();
+            duf.Show();
         }
     }
 }

@@ -238,16 +238,16 @@ namespace FlipGameDataBase.Data
                 output = matches.Where(x => x.PlayedOn > startDate).Where(x => x.PlayedOn < endDate).ToList();
             }
             return output;
-        }     
+        }
         public static Match GetMatchFromDate(DateTime dt)
         {
             using (Context contex = GetContext())
             {
                 var matches = contex.Matches;
                 var match = new Match();
-                foreach(var m in matches)
+                foreach (var m in matches)
                 {
-                    if(m.PlayedOn.ToString() == dt.ToString())
+                    if (m.PlayedOn.ToString() == dt.ToString())
                     { return m; }
                 }
                 return match;
@@ -262,27 +262,43 @@ namespace FlipGameDataBase.Data
                 var scores = context.PersonsScores;
 
                 var query = from x in scores
-                           join y in people on x.PersonId
-                           equals y.Id where x.MatchId == match.Id                
-                           select new
-                           {
-                               PersonName = y.Name,
-                               Score = x.Score,
-                               Place = x.Place
-                           };
+                            join y in people on x.PersonId
+                            equals y.Id
+                            where x.MatchId == match.Id
+                            select new
+                            {
+                                PersonName = y.Name,
+                                Score = x.Score,
+                                Place = x.Place
+                            };
                 output.PlayedOn = match.PlayedOn;
-                foreach(var p in query)
+                foreach (var p in query)
                 {
                     TempPerson tempPerson = new TempPerson();
                     tempPerson.Name = p.PersonName;
                     tempPerson.Score = p.Score;
                     tempPerson.Place = p.Place;
                     output.PeoplePlaceScore.Add(tempPerson);
-                    
+
                 }
-            
+
             }
             return output;
+        }
+        public static void DeletePerson(Person person)
+        {
+            using (Context context = GetContext())
+            {
+                var x = (from y in context.People
+                         where y.Id == person.Id
+                         select y).FirstOrDefault();
+                if (x != null)
+                {
+                    context.People.Remove(x);
+                    context.SaveChanges();
+                }
+
+            }
         }
     }
 }
