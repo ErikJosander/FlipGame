@@ -103,5 +103,11 @@ namespace FlipIt
             var duf = new DeleteUserForm();
             duf.Show();
         }
+
+        private void tutorialButton_Click(object sender, EventArgs e)
+        {
+            TutorialForm tf = new TutorialForm();
+            tf.Show();
+        }
     }
 }

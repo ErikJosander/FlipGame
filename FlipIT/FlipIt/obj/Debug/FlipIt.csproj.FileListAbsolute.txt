@@ -40,3 +40,4 @@ C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipIT\FlipIt\obj\Debug\FlipI
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipIT\FlipIt\obj\Debug\FlipIt.CreateUserForm.resources
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipIT\FlipIt\obj\Debug\FlipIt.ShowStatisticsForm.resources
 C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipIT\FlipIt\obj\Debug\FlipIt.DeleteUserForm.resources
+C:\Users\erikj\OneDrive\Dokumenter\GitHub\FlipGame\FlipIT\FlipIt\obj\Debug\FlipIt.TutorialForm.resources
